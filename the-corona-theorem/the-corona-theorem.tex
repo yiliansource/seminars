@@ -1,0 +1,163 @@
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{
+  amsmath, amsthm, amssymb, mathtools, dsfont, units, stmaryrd,
+  graphicx, wrapfig, subfig, float,                         
+  listings, color, inconsolata, pythonhighlight,            
+  fancyhdr, hyperref, enumerate, enumitem, framed
+}
+\usepackage{hyperref} 
+\usepackage[left=1.35in, right=1.35in, top=1.0in, bottom=.9in, headsep=.2in, footskip=0.35in]{geometry}
+\usepackage[bottom]{footmisc}
+\usepackage{anyfontsize}
+\usepackage{mdframed, color}
+\usepackage{lipsum}
+
+
+\renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{1.3mm}
+\setlength{\parindent}{0mm}
+\allowdisplaybreaks
+
+\setlist[enumerate]{itemsep=0mm,topsep=1mm}
+
+
+\usepackage[font={it,footnotesize}]{caption}
+\hypersetup{colorlinks=true, linkcolor=RoyalBlue, citecolor=RedOrange, urlcolor=ForestGreen}
+% \usepackage{titlesec}
+% \titleformat{\section}{\large\bfseries}{\thesection. }{0em}{}
+% \titleformat{\subsection}{\normalsize\bfseries\selectfont}{\thesubsection\;\;\;}{0em}{}
+\setlist[itemize]{wide=0pt, leftmargin=16pt, labelwidth=10pt, align=left}
+
+
+
+% \usepackage[subfigure]{tocloft}
+% \setlength{\cftbeforesecskip}{.9ex}
+% \cftsetindents{section}{0em}{0em}
+% \renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% \makeatletter
+% \renewcommand{\cftsecpresnum}{\begin{lrbox}{\@tempboxa}}
+% \renewcommand{\cftsecaftersnum}{\end{lrbox}}
+% \makeatother
+
+% \graphicspath{{Images/}{../Images/}}
+
+
+
+% \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% \let\b\mathbf
+% \let\bg\boldsymbol
+% \let\mc\mathcal
+
+\usepackage[mathscr]{euscript}
+
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\El}{\mathcal{L}}
+\newcommand{\1}{\mathds{1}}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\clspan}{\mathrm{clspan}}
+\newcommand{\mapping}[3]{
+  \ensuremath{
+    #1 : \left\{
+    \begin{array}{@{\;}c@{\;}c@{\;}l@{}}
+      #2 \\
+      #3
+    \end{array}
+    \right.
+  }
+}
+\newcommand{\cl}[1]{c\ell(#1)}
+\newcommand{\restr}[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \littletaller % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+
+
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\spann}{Span}		
+\DeclareMathOperator*{\bias}{Bias}		
+\DeclareMathOperator*{\ran}{ran}			
+\DeclareMathOperator*{\dv}{d\!}
+\DeclareMathOperator*{\diag}{diag}		
+\DeclareMathOperator*{\trace}{trace}	
+\DeclareMathOperator*{\supp}{supp}		
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+% \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{definition}[theorem]{Definition}
+% \newtheorem{example}[theorem]{Beispiel}
+% \newtheorem{remark}[theorem]{Bemerkung}
+
+
+% \AtBeginEnvironment{exercise}{%
+%   \pushQED{\qed}\renewcommand{\qedsymbol}{$\sslash$}
+% }
+% \AtEndEnvironment{exercise}{\popQED\endexercise}
+
+% \AtBeginEnvironment{solution}{%
+%   \pushQED{\qed}\renewcommand{\qedsymbol}{$\blacksquare$}
+% }
+% \AtEndEnvironment{solution}{\popQED\endsolution}
+
+
+% \pagestyle{fancy}
+% \renewcommand{\footrulewidth}{0pt}
+% \renewcommand{\headrulewidth}{0pt}
+
+% \setlength{\headheight}{14pt}
+% \renewcommand{\sectionmark}[1]{\markright{#1} }
+% \fancyhead[R]{\small\textit{\nouppercase{\rightmark}}}
+% \fancyhead[L]{Left Header}
+
+\usepackage{bold-extra}
+
+\begin{document}
+
+% \title{\textbf{The Smith factorization}}
+\author{\normalsize Ian Hornik}
+\date{\vspace{-0.8em}\normalsize\today}
+
+% \maketitle
+
+\begin{center}
+  {\Large\scshape\bfseries{The Corona Theorem}}
+\end{center}
+
+These are my notes for my talk in the winter semester of 2024, in the analysis seminar at the Technical University of Vienna.
+
+We will denote the space of all complex-valued, bounded, analytic functions on the unit disk $\D$ as $H^\infty$. The space of all multiplicative, bounded, linear functionals on $H^\infty$ not identically zero is denoted $\Delta(H^\infty)$ and is called the \emph{Gelfand space} of $H^\infty$. We endow this space with the trace of the weak-$\ast$ topology on the dual $(H^\infty)'$ and refer to this as the \emph{Gelfand topology}. For each $z \in \D$ we consider the point-evaluation functional
+\begin{equation*}
+  \pi_z : H^\infty \to \C,\; f \mapsto f(z)
+\end{equation*}
+and the set
+\begin{equation*}
+  \Delta_0 \coloneqq \{ \pi_z : z \in \D \}.
+\end{equation*}
+Clearly $\Delta_0 \subset \Delta(H^\infty)$. The \emph{corona} is defined as the complement of closure of $\Delta_0$ in the Gelfand topology. The corona theorem now states:
+
+\begin{theorem}[L. Carleson]
+  The corona is empty. In other words, $\Delta_0$ is dense in $\Delta(H^\infty)$.
+\end{theorem}
+
+
+
+\end{document}
