@@ -165,7 +165,7 @@ This is clearly multiplicative, bounded and linear and therefore belongs to $\De
 There is an equivalent version of the theorem, as given by the following proposition:
 
 \begin{proposition}
-  $\Delta_0$ is dense in $\Delta(H^\infty)$ if and only if for any $f_1, \dots, f_n \in H^\infty$, and $\delta > 0$ such that $\sum_{j=1}^n \vert f_j(z) \vert \geq \delta, z \in \D$, there exist $g_1, \dots g_n \in H^\infty$ such that $\sum_{j=1}^n f_j g_j = 1$.
+  $\Delta_0$ is dense in $\Delta(H^\infty)$ if and only if for any $\delta > 0$ and $f_1, \dots, f_n \in H^\infty$ such that $\sum_{j=1}^n \vert f_j(z) \vert \geq \delta, z \in \D$, there exist $g_1, \dots g_n \in H^\infty$ such that $\sum_{j=1}^n f_j g_j = 1$.
 \end{proposition}
 
 \begin{proof}
@@ -271,15 +271,42 @@ $$
   
 \end{innerproof}
 
-We recall the following 
+For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left[ \frac{1}{2 \pi} \int_0^{2 \pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right]^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+
+We define $H_0^1$ as the (closed) subspace of all $f \in H^1$, for which $f(0) = 0$.
+
+We summarize the characterisation of Hardy spaces:
+\begin{theorem} Let $1 \leq p \leq \infty$. Then:
+  \begin{enumerate}
+    \item $H^p$ is a Banach space.
+    \item For $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
+    $$ \lim_{r \to 1} f(re^{i \vartheta}) \eqqcolon f^*(e^{i \vartheta}) $$
+    exists and defines a function in $L^1(\T)$.
+  \end{enumerate}
+\end{theorem}
 
 \begin{lemma}
   The map
   \begin{equation*}
-    \Phi : L^\infty(\T) / H^\infty \to (H_0^1)',\, f + w \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_{-\pi}^\pi f g^* \diff x \right]
+    \Phi : L^\infty(\T) / H^\infty \to (H_0^1)',\, f + H^\infty \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_{-\pi}^\pi f g^* \diff x \right]
   \end{equation*}
   is an isometric isomorphism.
 \end{lemma}
+
+\begin{proof}
+  From functional analysis we know that $ (H_0^1)' \cong (L^1(\T))'/(H_0^1)^\perp $ via
+  $$ \mapping{\sigma}{(L^1(\T))'/(H_0^1)^\perp & \to & (H_0^1)'}{x' + (H_0^1)^\perp & \mapsto & \restr{x'}{(H_0^1)}.} $$
+  We also know $(L^1(\T))' \cong L^\infty(\T)$ via
+  $$ \Psi : L^\infty(\T) \to (L^1(\T))',\, f \mapsto \left[ g \mapsto \langle f, \bar{g} \rangle \coloneqq \frac{1}{2 \pi} \int_0^{2 \pi} f \bar{g} \diff \lambda \right]. $$
+  We can identify $H_0^1$ as a closed subspace of $L^1(\T)$ via the isometry $\rho : f \mapsto f^*$. We want to show $(\iota(H_0^1))^\perp \cong L^\infty$. Let $w^* \in (\iota(H_0^1))^\perp$, then for any $n \in \N$ we have
+  $$ 0 = \langle w^*, \bar{z}^n \rangle = \langle w^*, e^{-i n t} \rangle. $$
+  Therefore $w^* \in L_+^\infty = \iota(H^\infty)$ and thus $w \in H^\infty$.
+
+  Let
+
+  $$ \Psi(f + H^\infty) \coloneqq \sigma() $$
+\end{proof}
 
 \begin{innerproof}[Proof (continued)]
     \textit{Step 5 (Dualisation):} todo
