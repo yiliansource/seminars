@@ -298,18 +298,25 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
 $$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left[ \frac{1}{2 \pi} \int_0^{2 \pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right]^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+For real- or complex-valued functions defined on $\T$ we define an ``inner product''
+$$ \langle f, g \rangle \coloneqq \frac{1}{2 \pi} \int_0^{2\pi} f(e^{i \vartheta}) \overline{g(e^{i \vartheta})}\diff \vartheta. $$
+For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
+$$ \hat{f}(n) \coloneqq \langle f, e^{i n \vartheta} \rangle. $$
 
 We define $H_0^1$ as the (closed) subspace of all $f \in H^1$, for which $f(0) = 0$.
 
 We summarize the characterisation of Hardy spaces:
 \begin{theorem} Let $1 \leq p \leq \infty$. Then:
   \begin{enumerate}
-    \item $H^p$ is a Banach space.
-    \item For $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
+    \item $H^p$ is a Banach space\footnote{In particular, $H^\infty$ is a Banach algebra, which we already used in the introduction.}.
+    \item Let $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
     $$ \lim_{r \to 1} f(re^{i \vartheta}) \eqqcolon f^*(e^{i \vartheta}) $$
-    exists and defines a function in $L^p(\T)$.
+    exists and defines a function in $L^p(\T)$, also called the \emph{boundary values} of $f$.
     \item The map $f \mapsto f^*$ is an isometry from $H^p$ onto
-    $$ L_+^p(\T) \coloneqq \{ f \in L^p(\T) : \widehat{f}(n) = 0, \, n < 0 \} $$
+    $$ L^p_+(\T) \coloneqq \{ f \in L^p(\T) : \forall n < 0: \hat{f}(n) = 0 \}, $$
+    which is a closed subspace of $L^p(\T)$.
+    \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
+    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z}, \quad z \in \D $$
   \end{enumerate}
 \end{theorem}
 
@@ -351,7 +358,7 @@ We summarize the characterisation of Hardy spaces:
 \begin{lemma}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
   \begin{enumerate}
-    \item $ \displaystyle \int_\D \vert f' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \frac{\pi}{2} \Vert f \Vert_2^2 $
+    \item $ \displaystyle \int_\D \vert f' \vert^2 \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \frac{\pi}{2} \Vert f \Vert_2^2 $
     \item $ \displaystyle \int_\D \vert f g' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2^2 \Vert g \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f g u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty $
@@ -362,10 +369,12 @@ We summarize the characterisation of Hardy spaces:
 
 \begin{proof} {\ }
   \begin{enumerate}
-    \item d
+    \item Applying Green's formula on $f \bar{f}$ yields
+    $$ \vert f(0) \vert^2 = \frac{1}{2 \pi} \int_0^{2 \pi} \vert f^*(e^{i \vartheta}) \vert^2 \diff \vartheta - \frac{1}{2 \pi} \int_\D \Delta(f \bar{f}) \log \frac{1}{\vert z \vert} \diff \lambda^2 $$
+    Sine $\Delta(f \bar{f}) = 4 \partial \overline{\partial} (f \bar{f}) = 4 \partial ( f \overline{\partial} \bar{f} ) = 4 ( \partial f \overline{\partial} \bar{f} ) = 4 \vert f' \vert^2$ and $ \vert f(0) \vert^2 \geq 0$ we obtain
+    $$ \frac{2}{\pi} \int_\D \vert f' \vert^2  \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \Vert f \Vert_2^2 $$
+    and rearranging yields the desired inequality.
   \end{enumerate}
-
-  $$ \Delta(f \bar{f}) = 4 \partial \overline{\partial} (f \bar{f}) = 4 \partial ( f \overline{\partial} \bar{f} ) = 4 ( \partial f \overline{\partial} \bar{f} ) = 4 \vert f' \vert $$
 \end{proof}
 
 \end{document}
