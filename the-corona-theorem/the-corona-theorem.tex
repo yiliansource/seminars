@@ -11,7 +11,7 @@
 }
 \usepackage[unicode,colorlinks=false,pagebackref=false]{hyperref} 
 \usepackage[left=1.35in, right=1.35in, top=1.0in, bottom=.9in, headsep=.2in, footskip=0.35in]{geometry}
-\usepackage[bottom]{footmisc}
+% \usepackage[bottom]{footmisc}
 \usepackage{anyfontsize}
 \usepackage{mdframed, color}
 \usepackage{cleveref}
@@ -22,6 +22,7 @@
 \renewcommand{\baselinestretch}{1.2}
 \setlength{\parskip}{1.3mm}
 \setlength{\parindent}{0mm}
+\setlength{\skip\footins}{0.7cm}
 \allowdisplaybreaks
 
 \setlist[enumerate]{itemsep=0mm,topsep=1mm}
@@ -231,7 +232,7 @@ Before we continue we want to briefly introduce a useful generalization of the c
 
 Note that by writing a complex number $z \in \C$ as $z = x + iy$ with $x, y \in \R$ we can identify $\C \cong \R^2$. Therefore we can also reasonably interpret the Wirtinger operators to act on $C^1(\Omega)$ with an open subset $\Omega \subseteq \C$.
 
-Before listing properties of the Wirtinger operators we quickly want to recall that a function $f : \C \to \C, f = u + iv$ is holomorphic if and only if it satisfies the \emph{Cauchy--Riemann equations}:
+Before listing properties of the Wirtinger operators we quickly want to recall that a function $f \in C^1(\Omega), f = u + iv$ is holomorphic if and only if it satisfies the \emph{Cauchy--Riemann equations}:
 \begin{equation*}
   \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \textrm{and} \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}.
 \end{equation*}
@@ -239,7 +240,8 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 \begin{remark}
   Let $\Omega \subseteq \C$ be open and $f \in C^1(\Omega)$.
   \begin{enumerate}
-    \item The Wirtinger operators are $\C$-linear and satisfy the Leibniz rule\footnote{This means that the Wirtinger opeartors are derivatives from an algebraic perspective.}.
+    \item The Wirtinger operators are $\C$-linear, satisfy the Leibniz rule\footnote{This means that the Wirtinger opeartors are derivatives from an algebraic perspective.} and
+    $$ \overline{\left( \frac{\partial f}{\partial z} \right)} = \frac{\partial \bar{f}}{\partial \bar{z}}, \quad \overline{\left( \frac{\partial f}{\partial \bar{z}} \right)} = \frac{\partial \bar{f}}{\partial z} $$
     \item If $f \in \Hol(\Omega)$, then
     $$
       \frac{\partial f}{\partial z} = \frac{1}{2} \left( \frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y} \right) = \frac{1}{2} \left( \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} - i\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y} \right) = \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x} = \frac{\partial f}{\partial x} = f'.
@@ -264,7 +266,7 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   \begin{align*}
     P_{1,0} : C_1 \to C_0,\, (g_j)_{j=1}^n \,\mapsto\, \sum_{j=1}^n g_j f_j, \quad P_{2,1} : C_2 \to C_1,\, (g_{jk})_{j,k=1}^n \,\mapsto\, \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n.
   \end{align*}
-  The resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
+  Applying $\overline{\partial}$ pointwise in $C_j, j = 0, 1, 2$, the resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
   \begin{center}
     \begin{tikzcd}[row sep=large,column sep=large]
       C_2 \arrow[r, "P_{2,1}"] \arrow[d, "\overline{\partial}", swap] & C_1 \arrow[r, "P_{1,0}"] \arrow[d, "\overline{\partial}", swap] & C_0 \arrow[d, "\overline{\partial}", swap] \\
@@ -282,8 +284,34 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   \end{enumerate}
 \end{lemma}
 
-\begin{proof}
-  \lipsum[1]
+\begin{proof}{\ }
+  \begin{enumerate}
+    \item For $g \in C_0$ and $f \in \Hol(\D)$ we have
+    $$ \frac{\partial (gf)}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} f + g \frac{\partial f}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} f $$
+    and together with the linearity of $\overline{\partial}$ the statement follows.
+    \item ``$\subseteq$'': Let $g \in C_2, g = (g_{jk})_{j,k=1}^n$, then
+    $$ P_{1,0} P_{2,1} g = P_{1,0} \left[ \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n \right] = \sum_{j=1}^n \sum_{k=1}^n g_{jk} f_k = 0 $$
+    since $g$ is skew-symmetric and therefore $g \in \ker P_{1,0}$.
+
+    ``$\supseteq$'' Let $g \in \ker P_{1,0} \subseteq C_1, g = (g_1, \dots, g_n)$. We define $p = (p_{jk})_{j,k=1}^n \in C_2$ by
+    $$ p_{jk} \coloneqq \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} (g_j \overline{f_k} - g_k \overline{f_j}). $$
+    Then for any $j=1,\dots,n$ we have
+    \begin{align*}
+      P_{2,1} p &= \sum_{k=1}^n p_{jk} f_k = \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \sum_{k=1}^n (g_j \vert f_k \vert^2 - g_k \overline{f_j} f_k) = \\
+      &= g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} \sum_{k=1}^n g_k f_k = g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} P_{1,0} g = \\
+      &= g_j,
+    \end{align*}
+    and therefore $g_j \in \ran P_{2,1}$.
+    \item For given $v \in C^\infty(\D)$ we want to solve the partial differential equation
+    $$ \frac{\partial u}{\partial \bar{z}} = v $$
+    for some $u \in C^\infty(\D)$.
+
+    \dots
+
+    Arguing pointwise shows the surjectivity of the maps $\overline{\partial} : C_\ell \to C_\ell$ for $\ell = 0, 1$. For $\ell = 2$ and given $b = (b_{jk})_{j,k=1}^n \in C_2$ we first solve
+    $$ \overline{\partial} a_{jk} = b_{jk}, \quad \textrm{for} \quad 1 \leq j < k \leq n $$
+    and then set $a_{jj} = 0$ and $a_{jk} = -a_{kj}$ for $n \geq j > k \geq 1$.
+  \end{enumerate}
 \end{proof}
 
 \begin{innerproof}[Proof (continued)]
@@ -298,10 +326,8 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
 $$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left[ \frac{1}{2 \pi} \int_0^{2 \pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right]^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
-For real- or complex-valued functions defined on $\T$ we define an ``inner product''
-$$ \langle f, g \rangle \coloneqq \frac{1}{2 \pi} \int_0^{2\pi} f(e^{i \vartheta}) \overline{g(e^{i \vartheta})}\diff \vartheta. $$
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
-$$ \hat{f}(n) \coloneqq \langle f, e^{i n \vartheta} \rangle. $$
+$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_0^{2\pi} f(x) e^{i n x} \diff x. $$
 
 We define $H_0^1$ as the (closed) subspace of all $f \in H^1$, for which $f(0) = 0$.
 
@@ -312,42 +338,42 @@ We summarize the characterisation of Hardy spaces:
     \item Let $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
     $$ \lim_{r \to 1} f(re^{i \vartheta}) \eqqcolon f^*(e^{i \vartheta}) $$
     exists and defines a function in $L^p(\T)$, also called the \emph{boundary values} of $f$.
-    \item The map $f \mapsto f^*$ is an isometry from $H^p$ onto
+    \item The map ${}^* : f \mapsto f^*$ is an isometry from $H^p$ onto
     $$ L^p_+(\T) \coloneqq \{ f \in L^p(\T) : \forall n < 0: \hat{f}(n) = 0 \}, $$
     which is a closed subspace of $L^p(\T)$.
     \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
-    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z}, \quad z \in \D $$
+    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \diff \mu(\zeta), \quad z \in \D $$
   \end{enumerate}
 \end{theorem}
 
 \begin{lemma}
   The map
   \begin{equation*}
-    \Phi : L^\infty(\T) / H^\infty \to (H_0^1)',\, f + H^\infty \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right]
+    \Phi : L^\infty(\T) / (H^\infty)^* \to ((H_0^1)^*)',\, f + (H^\infty)^* \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right]
   \end{equation*}
   is an isometric isomorphism.
 \end{lemma}
 
 \begin{proof}
-  From functional analysis we know that $ (H_0^1)' \cong (L^1(\T))'/(H_0^1)^\perp $ via
-  $$ \mapping{\sigma}{(L^1(\T))'/(H_0^1)^\perp & \to & (H_0^1)'}{x' + (H_0^1)^\perp & \mapsto & \restr{x'}{(H_0^1)}.} $$
-  We also know $(L^1(\T))' \cong L^\infty(\T)$ via
-  $$ \Psi : L^\infty(\T) \to (L^1(\T))',\, f \mapsto \left[ g \mapsto \langle f, \bar{g} \rangle \coloneqq \frac{1}{2 \pi} \int_0^{2 \pi} f \bar{g} \diff \lambda \right]. $$
-  We can identify $H_0^1$ as a closed subspace of $L^1(\T)$ via the isometry $\rho : f \mapsto f^*$. We want to show $(\iota(H_0^1))^\perp \cong L^\infty$. Let $w^* \in (\iota(H_0^1))^\perp$, then for any $n \in \N$ we have
-  $$ 0 = \langle w^*, \bar{z}^n \rangle = \langle w^*, e^{-i n t} \rangle. $$
-  Therefore $w^* \in L_+^\infty = \iota(H^\infty)$ and thus $w \in H^\infty$.
-
-  Let
-
-  $$ \Psi(f + H^\infty) \coloneqq \sigma() $$
+  We have $L^\infty(\T) \cong L^1(\T)'$ via the duality
+  $$ \langle f, g \rangle \coloneqq \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T),\; g \in L^1(\T). $$
+  Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / (H_0^1)^\perp$ via
+  $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / (H_0^1)^\perp,\; g \in (H_0^1)^*. $$
+  It remains to show that $(H_0^1)^\perp = (H^\infty)^*$. Let $w \in (H_0^1)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
+  $$ 0 = \langle w, \bar{z}^n \rangle = \langle w, e^{-i n t} \rangle. $$
+  Therefore $w \in L_+^\infty(\T) = (H^\infty)^*$. 
 \end{proof}
 
 \begin{innerproof}[Proof (continued)]
-    \textit{Step 5 (Dualisation):} todo
+    \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$:
+    \begin{align*}
+      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(f + (H^\infty)^*) \Vert = \\
+      &= \sup \{ \vert \Phi(f + (H^\infty)^*)(g) \vert : g \in (H_0^1)^*, \Vert g \Vert_1 \leq 1 \} = \\
+      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right\vert : g \in H_0^1, \Vert g \Vert_1 \leq 1 \right\}
+    \end{align*}
 \end{innerproof}
 
 \begin{proof}
-  \lipsum[1]
 \end{proof}
 
 \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
@@ -370,8 +396,14 @@ We summarize the characterisation of Hardy spaces:
 \begin{proof} {\ }
   \begin{enumerate}
     \item Applying Green's formula on $f \bar{f}$ yields
+    $$ \int_\D (\log \frac{1}{\vert z \vert} \Delta (f \bar{f}) - f \bar{f}) $$
     $$ \vert f(0) \vert^2 = \frac{1}{2 \pi} \int_0^{2 \pi} \vert f^*(e^{i \vartheta}) \vert^2 \diff \vartheta - \frac{1}{2 \pi} \int_\D \Delta(f \bar{f}) \log \frac{1}{\vert z \vert} \diff \lambda^2 $$
-    Sine $\Delta(f \bar{f}) = 4 \partial \overline{\partial} (f \bar{f}) = 4 \partial ( f \overline{\partial} \bar{f} ) = 4 ( \partial f \overline{\partial} \bar{f} ) = 4 \vert f' \vert^2$ and $ \vert f(0) \vert^2 \geq 0$ we obtain
+    Since
+    \begin{align*}
+      \Delta(f \bar{f}) &= 4 \partial \overline{\partial} (f \bar{f}) = 4 \partial ( \bar{f} \cdot \overline{\partial} f + f \cdot \overline{\partial} \bar{f} ) = 4 \partial (f \cdot \overline{\partial} \bar{f}) = 4 (\partial f \cdot \overline{\partial} \bar{f} + f \cdot \overline{\partial} \partial \bar{f}) = \\
+      &= 4 (\partial f \cdot \overline{\partial f} + f \cdot \overline{\partial} \,\overline{ \overline{\partial} f }) = 4 \partial ( f \overline{\partial} \bar{f} ) = 4 \vert f' \vert^2
+    \end{align*}
+    and $ \vert f(0) \vert^2 \geq 0$ we obtain
     $$ \frac{2}{\pi} \int_\D \vert f' \vert^2  \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \Vert f \Vert_2^2 $$
     and rearranging yields the desired inequality.
   \end{enumerate}
