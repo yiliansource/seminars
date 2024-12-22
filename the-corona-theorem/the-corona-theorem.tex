@@ -352,6 +352,7 @@ We summarize the characterisation of Hardy spaces:
 \begin{theorem} Let $1 \leq p \leq \infty$. Then:
   \begin{enumerate}
     \item $H^p$ is a Banach space\footnote{In particular, $H^\infty$ is a Banach algebra, which we already used in the introduction.}.
+    \item For $p \leq q \leq \infty$ it holds that $H^p \supseteq H^q$.
     \item Let $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
     $$ \lim_{r \to 1} f(re^{i \vartheta}) \eqqcolon f^*(e^{i \vartheta}) $$
     exists and defines a function in $L^p(\T)$, also called the \emph{boundary values} of $f$.
@@ -366,7 +367,7 @@ We summarize the characterisation of Hardy spaces:
 \begin{lemma}
   The map
   \begin{equation*}
-    \Phi : L^\infty(\T) / (H^\infty)^* \to ((H_0^1)^*)',\, f + (H^\infty)^* \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right]
+    \Phi : L^\infty(\T) / (H^\infty)^* \to ((H_0^1)^*)',\, f + (H^\infty)^* \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_\T f g \diff \mu \right]
   \end{equation*}
   is an isometric isomorphism.
 \end{lemma}
@@ -374,22 +375,22 @@ We summarize the characterisation of Hardy spaces:
 \begin{proof}
   We have $L^\infty(\T) \cong L^1(\T)'$ via the duality
   $$ \langle f, g \rangle \coloneqq \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T),\; g \in L^1(\T). $$
-  Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / (H_0^1)^\perp$ via
-  $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / (H_0^1)^\perp,\; g \in (H_0^1)^*. $$
-  It remains to show that $(H_0^1)^\perp = (H^\infty)^*$. Let $w \in (H_0^1)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
-  $$ 0 = \langle w, \bar{z}^n \rangle = \langle w, e^{-i n t} \rangle. $$
-
-  Therefore $w \in L_+^\infty(\T) = (H^\infty)^*$. 
-
-  \dots
-
+  Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / ((H_0^1)^*)^\perp$ via
+  $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / ((H_0^1)^*)^\perp,\; g \in (H_0^1)^*. $$
+  It remains to show that $((H_0^1)^*)^\perp = (H^\infty)^*$. Let $w^* \in ((H_0^1)^*)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
+  $$ 0 = \langle w^*, (z^n)^* \rangle = \langle w^*, e^{i n t} \rangle = \widehat{w^*}(-n). $$
+  Therefore $w^* \in L_+^\infty(\T) = (H^\infty)^*$. For the other inclusion let $w^* \in (H^\infty)^*$ and $h^* \in (H_0^1)^*$, then
+  \begin{align*}
+    \langle w^*, h^* \rangle &= \frac{1}{2\pi} \int_0^{2 \pi} w^*(e^{i \vartheta}) h^*(e^{i \vartheta}) \diff \vartheta = \lim_{r \to 1} \frac{1}{2\pi} \int_0^{2 \pi} w(r e^{i \vartheta}) h(r e^{i \vartheta}) \diff \vartheta = \\
+    &= \lim_{r \to 1} \frac{1}{2\pi i} \int_\T \frac{w_r(\zeta) h_r(\zeta)}{\zeta} \diff \zeta = \lim_{r \to 1} w_r(0) h_r(0) = 0,
+  \end{align*}
+  where the second-to-last equation follows since $w_r h_r \in \Hol(\cl{\D})$ and the last one since $h(0) = 0$. Therefore $w^* \in ((H_0^1)^*)^\perp$, concluding the proof.
 \end{proof}
 
 \begin{innerproof}[Proof (continued)]
     \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$:
     \begin{align*}
-      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(f + (H^\infty)^*) \Vert = \\
-      &= \sup \{ \vert \Phi(f + (H^\infty)^*)(g) \vert : g \in (H_0^1)^*, \Vert g \Vert_1 \leq 1 \} = \\
+      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(f + (H^\infty)^*) \Vert = \sup \{ \vert \Phi(f + (H^\infty)^*)(g) \vert : g \in (H_0^1)^*, \Vert g \Vert_1 \leq 1 \} = \\
       &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right\vert : g \in H_0^1, \Vert g \Vert_1 \leq 1 \right\}
     \end{align*}
 \end{innerproof}
