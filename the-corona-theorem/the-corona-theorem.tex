@@ -91,6 +91,11 @@
 
 \newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
 
+\newcommand{\Wirtz}[1][]{\frac{\partial #1}{\partial z}}
+\newcommand{\wirtz}{\partial}
+
+\newcommand{\Wirtzbar}[1][]{\frac{\partial #1}{\partial \bar{z}}}
+\newcommand{\wirtzbar}{\overline{\partial}}
 
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator*{\argmin}{argmin}
@@ -160,7 +165,7 @@ These are my notes for my talk in the winter semester of 2024, in the analysis s
 % §3: Hardy spaces - overview and some properties, along with the dualisation lemma and application the proof.
 % §4: Integral estimates - show the required estimates and apply them to the proof.
 
-We will denote the space of all complex-valued, bounded, analytic functions on the unit disk $\D$ as $H^\infty$. Equipped with the supremum norm $\Vert \cdot \Vert_\infty$ this space becomes a commutative Banach algebra. The space of all multiplicative, bounded, linear functionals on $H^\infty$ not identically zero is denoted $\Delta(H^\infty)$ and is called the \emph{Gelfand space} of $H^\infty$. We endow this space with the subspace topology of the weak\nobreakdash-* topology on the dual $(H^\infty)'$, which we will refer to as the \emph{Gelfand topology}. For each $z \in \D$ we consider the point-evaluation functional
+We will denote the space of all complex-valued, bounded, analytic functions on the unit disk $\D$ as $H^\infty$. Equipped with the supremum norm $\Vert \cdot \Vert_\infty$ this space becomes a commutative Banach algebra. The space of all multiplicative, bounded, linear functionals on $H^\infty$ not identically zero is denoted $\Delta(H^\infty)$ and is called the \emph{Gelfand space} of $H^\infty$. We endow this space with the subspace topology of the weak\nobreakdash-* topology on the topological dual $(H^\infty)'$, which we will refer to as the \emph{Gelfand topology}. For each $z \in \D$ we consider the point-evaluation functional
 \begin{equation*}
   \pi_z : H^\infty \to \C,\; f \mapsto f(z).
 \end{equation*}
@@ -212,9 +217,9 @@ Over the following sections we will prove a stronger version of the right statem
   $$ 1 = \lim_{m \to \infty} \sum_{j=1}^n f_{j,s_m} g_{j,s_m} = \sum_{j=1}^n f_j g_j, $$
   concluding our claim. We may thus assume that our given $f_1, \dots, f_n$ are holomorphic on $\cl{\D}$ instead.
 
-  \textit{Step 2 (Solve with $g_1, \dots, g_n \in C^\infty(\cl{\D})$):} For $j=1,\dots,n$ we define
-  $$ h_j \coloneqq \frac{\bar{f_j}}{\sum_{k=1}^n \vert f_k \vert^2}, $$
-  then clearly $h_j \in C^\infty(\cl{\D})$, $ \sum_{j=1}^n f_j h_j = 1$ and $\Vert h_j \Vert \leq \frac{1}{\delta}$. The real task now lies in changing the $h_j$ to become holomorphic in $\D$, without losing control over the boundedness of the solutions.
+  \textit{Step 2 (Solve in $C^\infty(\cl{\D})$):} For $j=1,\dots,n$ we define
+  $$ h_j \coloneqq \frac{\bar{f_j}}{\sum_{k=1}^n \vert f_k \vert^2} \in C^\infty(\cl{\D}), $$
+  then clearly $ \sum_{j=1}^n f_j h_j = 1$ and $\Vert h_j \Vert_\infty \leq \frac{1}{\delta}$. The real task now lies in changing the $h_j$ to become holomorphic in $\D$, without losing control over the boundedness of the solutions.
 \end{innerproof}
 
 \section{Wirtinger Derivatives}
@@ -230,7 +235,7 @@ Before we continue we want to briefly introduce a useful generalization of the c
   We will also abbreviate these operators as $\partial$ and $\bar{\partial}$, respectively.
 \end{definition}
 
-Note that by writing a complex number $z \in \C$ as $z = x + iy$ with $x, y \in \R$ we can identify $\C \cong \R^2$. Therefore we can also reasonably interpret the Wirtinger operators to act on $C^1(\Omega)$ with an open subset $\Omega \subseteq \C$.
+Note that by writing a complex number $z \in \C$ as $z = x + iy$ with $x, y \in \R$ we can identify $\C \cong \R^2$. Therefore we can also interpret the Wirtinger operators to act on $C^1(\Omega)$ with an open subset $\Omega \subseteq \C$.
 
 Before listing properties of the Wirtinger operators we quickly want to recall that a function $f \in C^1(\Omega), f = u + iv$ is holomorphic if and only if it satisfies the \emph{Cauchy--Riemann equations}:
 \begin{equation*}
@@ -242,7 +247,7 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   \begin{enumerate}
     \item The Wirtinger operators are $\C$-linear, satisfy the Leibniz rule\footnote{This means that the Wirtinger opeartors are derivatives from an algebraic perspective.} and
     $$ \overline{\left( \frac{\partial f}{\partial z} \right)} = \frac{\partial \bar{f}}{\partial \bar{z}}, \quad \overline{\left( \frac{\partial f}{\partial \bar{z}} \right)} = \frac{\partial \bar{f}}{\partial z} $$
-    \item If $f \in \Hol(\Omega)$, then
+    \item If $f \in \Hol(\Omega), f = u + iv$, then
     $$
       \frac{\partial f}{\partial z} = \frac{1}{2} \left( \frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y} \right) = \frac{1}{2} \left( \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} - i\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y} \right) = \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x} = \frac{\partial f}{\partial x} = f'.
     $$
@@ -251,44 +256,44 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
       \frac{\partial f}{\partial \bar{z}} &= \frac{1}{2} \left( \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y} \right) = \frac{1}{2} \left( \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} + i\frac{\partial u}{\partial y} - \frac{\partial v}{\partial y} \right) = \\
       &= \frac{1}{2} \left( \frac{\partial u}{\partial x} - \frac{\partial v}{\partial y} \right) + \frac{i}{2} \left( \frac{\partial v}{\partial x} + \frac{\partial u}{\partial y} \right),
     \end{align*}
-    we have that\footnote{This can be interpreted as ``$f$ is independant of $\overline{z}$''.} $f \in \Hol(\Omega)$ if and only if $\overline{\partial}f = 0$.
+    we have that\footnote{This can be interpreted as ``$f$ is independant of $\overline{z}$''.} $f \in \Hol(\Omega)$ if and only if $\wirtzbar f = 0$.
     \item On $C^2(\Omega)$, the \emph{Laplace operator} can be represented as
     $$ \Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} = \left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right) \left( \frac{\partial}{\partial x} + i \frac{\partial}{\partial y} \right) = 4 \frac{\partial}{\partial z} \frac{\partial}{\partial \bar{z}}. $$
   \end{enumerate}
 \end{remark}
 
-\begin{innerproof}
+\begin{innerproof}[Proof (continued)]
   \textit{Step 3 (The Koszul complex):} We consider the spaces
   \begin{equation*}
     C_0 \coloneqq C^\infty(\overline{\D}), \quad C_1 \coloneqq (C_0)^n, \quad C_2 \coloneqq \{ A \in (C_0)^{n \times n} : A = -A^T \}
   \end{equation*}
-  and the maps
+  and the linear maps
   \begin{align*}
     P_{1,0} : C_1 \to C_0,\, (g_j)_{j=1}^n \,\mapsto\, \sum_{j=1}^n g_j f_j, \quad P_{2,1} : C_2 \to C_1,\, (g_{jk})_{j,k=1}^n \,\mapsto\, \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n.
   \end{align*}
-  Applying $\overline{\partial}$ pointwise in $C_j, j = 0, 1, 2$, the resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
+  Applying $\wirtzbar$ pointwise in $C_j, j = 0, 1, 2$, the resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
   \begin{center}
     \begin{tikzcd}[row sep=large,column sep=large]
-      C_2 \arrow[r, "P_{2,1}"] \arrow[d, "\overline{\partial}", swap] & C_1 \arrow[r, "P_{1,0}"] \arrow[d, "\overline{\partial}", swap] & C_0 \arrow[d, "\overline{\partial}", swap] \\
+      C_2 \arrow[r, "P_{2,1}"] \arrow[d, "\wirtzbar", swap] & C_1 \arrow[r, "P_{1,0}"] \arrow[d, "\wirtzbar", swap] & C_0 \arrow[d, "\wirtzbar", swap] \\
       C_2 \arrow[r, "P_{2,1}", swap] & C_1 \arrow[r, "P_{1,0}", swap] & C_0
     \end{tikzcd}
   \end{center}
 \end{innerproof}
 
-\begin{lemma}
+\begin{lemma} \label{lem:koszul}
   The Koszul complex has the following properties:
   \begin{enumerate}
-    \item The diagram is commutative, that is we have $P_{j+1,j} \overline{\partial} = \overline{\partial} P_{j+1,j}$ for $j = 0,1$.
+    \item The diagram is commutative, that is we have $P_{j+1,j} \wirtzbar = \wirtzbar P_{j+1,j}$ for $j = 0,1$.
     \item The horizontal sequences are exact, that is $\ran P_{2,1} = \ker P_{1,0}$.
-    \item The maps $\overline{\partial} : C_j \to C_j$ for $j=0,1,2$ are surjective.
+    \item The maps $\wirtzbar : C_j \to C_j$ for $j=0,1,2$ are surjective.
   \end{enumerate}
 \end{lemma}
 
 \begin{proof}{\ }
   \begin{enumerate}
-    \item For $g \in C_0$ and $f \in \Hol(\D)$ we have
+    \item For $g \in C_0$ and $f \in \Hol(\cl{\D})$ we have
     $$ \frac{\partial (gf)}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} \cdot f + g \cdot \frac{\partial f}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} \cdot f $$
-    and together with the linearity of $\overline{\partial}$ the statement follows.
+    and together with the linearity of $\wirtzbar$ the statement follows.
     \item ``$\subseteq$'': Let $g \in C_2, g = (g_{jk})_{j,k=1}^n$, then
     $$ P_{1,0} P_{2,1} g = P_{1,0} \left[ \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n \right] = \sum_{j=1}^n \sum_{k=1}^n g_{jk} f_k f_j = 0 $$
     since $g$ is skew-symmetric and therefore $g \in \ker P_{1,0}$.
@@ -297,37 +302,49 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
     $$ p_{jk} \coloneqq \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} (g_j \overline{f_k} - g_k \overline{f_j}). $$
     Then for any $j=1,\dots,n$ we have
     \begin{align*}
-      P_{2,1} p &= \sum_{k=1}^n p_{jk} f_k = \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \sum_{k=1}^n (g_j \vert f_k \vert^2 - g_k \overline{f_j} f_k) = \\
+      (P_{2,1} p)_j &= \sum_{k=1}^n p_{jk} f_k = \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \sum_{k=1}^n (g_j \vert f_k \vert^2 - g_k \overline{f_j} f_k) = \\
       &= g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} \sum_{k=1}^n g_k f_k = g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} P_{1,0} g = \\
       &= g_j,
     \end{align*}
     and therefore $g_j \in \ran P_{2,1}$.
-    \item For given $v \in C^\infty(\D)$ we want to solve the partial differential equation
+    \item For given $v \in C^\infty(\cl{\D})$ we want to solve the partial differential equation
     $$ \frac{\partial u}{\partial \bar{z}} = v $$
-    for some $u \in C^\infty(\D)$.
+    for some $u \in C^\infty(\cl{\D})$.
 
     \dots
 
-    Arguing pointwise shows the surjectivity of the maps $\overline{\partial} : C_\ell \to C_\ell$ for $\ell = 0, 1$. For $\ell = 2$ and given $b = (b_{jk})_{j,k=1}^n \in C_2$ we first solve
-    $$ \overline{\partial} a_{jk} = b_{jk}, \quad \textrm{for} \quad 1 \leq j < k \leq n $$
+    Arguing pointwise shows the surjectivity of the maps $\wirtzbar : C_\ell \to C_\ell$ for $\ell = 0, 1$. For $\ell = 2$ and given $b = (b_{jk})_{j,k=1}^n \in C_2$ we first solve
+    $$ \wirtzbar a_{jk} = b_{jk}, \quad \textrm{for} \quad 1 \leq j < k \leq n $$
     and then set $a_{jj} = 0$ and $a_{jk} = -a_{kj}$ for $n \geq j > k \geq 1$.
   \end{enumerate}
 \end{proof}
 
 \begin{innerproof}[Proof (continued)]
-  \textit{Step 4 (Apply to $h = (h_1, \dots, h_n) \in C_1$):} todo
-
-  \dots
-
-  
+  \textit{Step 4 (Apply to $h = (h_1, \dots, h_n) \in C_1$):} In step 2 we constructed an element $h = (h_1, \dots, h_n) \in C_1$ by setting
+  $$ h_j \coloneqq \frac{\bar{f_j}}{\sum_{k=1}^n \vert f_k \vert^2}. $$
+  By our construction we have $P_{1,0} h = 1$ and therefore $0 = \wirtzbar P_{1,0} h = P_{1,0} \wirtzbar h$, thus $\wirtzbar h \in \ker P_{1,0}$. By \Cref{lem:koszul} there exists $b \in C_2$ such that $P_{2,1} b = \wirtzbar h$ and $a \in C_2$ such that $\wirtzbar a = b$. We now set $g \coloneqq h - P_{2,1} a \in C_1$. Then
+  $$ P_{1,0} g = P_{1,0} h - P_{1,0} P_{2,1} a = 1 $$
+  and
+  $$ \wirtzbar g = \wirtzbar h - \wirtzbar P_{2,1} a = \wirtzbar h - P_{2,1} b = 0. $$
+  Therefore $g$ is a solution to
+  $$ \sum_{k=1}^n f_k g_k = 1 $$
+  in $\Hol(\cl{\D})$. However, we do not have an estimate on $\vert g_j \vert$ yet.
 \end{innerproof}
 
 \section{Hardy Spaces}
 
+Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a function $f : \T \to \C$ it holds that
+$$ \int_\T f \diff \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \diff \vartheta. $$
+We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
+\begin{align*}
+  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \diff \mu \right)^{1/p}, \quad 1 \leq p < \infty, \\
+  &\Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
+\end{align*}
+
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
-$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left[ \frac{1}{2 \pi} \int_0^{2 \pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right]^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_{-\pi}^{\pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
-$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_0^{2\pi} f(x) e^{i n x} \diff x. $$
+$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} f(e^{i \vartheta}) e^{i n \vartheta} \diff \vartheta. $$
 
 We define $H_0^1$ as the (closed) subspace of all $f \in H^1$, for which $f(0) = 0$.
 
@@ -361,7 +378,11 @@ We summarize the characterisation of Hardy spaces:
   $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / (H_0^1)^\perp,\; g \in (H_0^1)^*. $$
   It remains to show that $(H_0^1)^\perp = (H^\infty)^*$. Let $w \in (H_0^1)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
   $$ 0 = \langle w, \bar{z}^n \rangle = \langle w, e^{-i n t} \rangle. $$
+
   Therefore $w \in L_+^\infty(\T) = (H^\infty)^*$. 
+
+  \dots
+
 \end{proof}
 
 \begin{innerproof}[Proof (continued)]
@@ -377,6 +398,20 @@ We summarize the characterisation of Hardy spaces:
 \end{proof}
 
 \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
+
+  We want to redescribe the integral
+  $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
+  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. The function
+  $$ \Gamma(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0 $$
+
+  Let $\psi \coloneqq v f$. By Green's theorem we have
+  \begin{align*}
+    \int_\D \Gamma \Delta \psi - \psi \Delta \Gamma \lambda^2 = \int_\T \Gamma(\zeta) \frac{\partial \psi}{\partial \zeta}(\zeta) - \psi(\zeta) \frac{\partial \Gamma}{\partial \zeta}(\zeta) \diff \mu(\zeta)
+  \end{align*}
+  \begin{align*}
+    \int_\D \Gamma \Delta \psi \diff \lambda^2 - \psi(0) = -\int_\T \psi \nabla \Gamma \diff \mu
+  \end{align*}
+
 \end{innerproof}
 
 \section{Integral estimates}
@@ -400,8 +435,8 @@ We summarize the characterisation of Hardy spaces:
     $$ \vert f(0) \vert^2 = \frac{1}{2 \pi} \int_0^{2 \pi} \vert f^*(e^{i \vartheta}) \vert^2 \diff \vartheta - \frac{1}{2 \pi} \int_\D \Delta(f \bar{f}) \log \frac{1}{\vert z \vert} \diff \lambda^2 $$
     Since
     \begin{align*}
-      \Delta(f \bar{f}) &= 4 \partial \overline{\partial} (f \bar{f}) = 4 \partial ( \bar{f} \cdot \overline{\partial} f + f \cdot \overline{\partial} \bar{f} ) = 4 \partial (f \cdot \overline{\partial} \bar{f}) = 4 (\partial f \cdot \overline{\partial} \bar{f} + f \cdot \overline{\partial} \partial \bar{f}) = \\
-      &= 4 (\partial f \cdot \overline{\partial f} + f \cdot \overline{\partial} \,\overline{ \overline{\partial} f }) = 4 \partial ( f \overline{\partial} \bar{f} ) = 4 \vert f' \vert^2
+      \Delta(f \bar{f}) &= 4 \partial \wirtzbar (f \bar{f}) = 4 \partial ( \bar{f} \cdot \wirtzbar f + f \cdot \wirtzbar \bar{f} ) = 4 \partial (f \cdot \wirtzbar \bar{f}) = 4 (\partial f \cdot \wirtzbar \bar{f} + f \cdot \wirtzbar \partial \bar{f}) = \\
+      &= 4 (\partial f \cdot \overline{\partial f} + f \cdot \wirtzbar \,\overline{ \wirtzbar f }) = 4 \partial ( f \wirtzbar \bar{f} ) = 4 \vert f' \vert^2
     \end{align*}
     and $ \vert f(0) \vert^2 \geq 0$ we obtain
     $$ \frac{2}{\pi} \int_\D \vert f' \vert^2  \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \Vert f \Vert_2^2 $$
