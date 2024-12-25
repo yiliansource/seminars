@@ -390,8 +390,10 @@ We summarize the characterisation of Hardy spaces:
 \begin{innerproof}[Proof (continued)]
     \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$:
     \begin{align*}
-      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(f + (H^\infty)^*) \Vert = \sup \{ \vert \Phi(f + (H^\infty)^*)(g) \vert : g \in (H_0^1)^*, \Vert g \Vert_1 \leq 1 \} = \\
-      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_{-\pi}^\pi f g \diff x \right\vert : g \in H_0^1, \Vert g \Vert_1 \leq 1 \right\}
+      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(v + (H^\infty)^*) \Vert = \\
+      &= \sup \{ \vert \Phi(v + (H^\infty)^*)(g) \vert : f \in (H_0^1)^*, \Vert f \Vert_1 \leq 1 \} = \\
+      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_\T v f^* \diff \mu \right\vert : f \in H_0^1, \Vert f \Vert_1 \leq 1 \right\} = \\
+      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert : f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1 \right\}
     \end{align*}
 \end{innerproof}
 
@@ -402,17 +404,26 @@ We summarize the characterisation of Hardy spaces:
 
   We want to redescribe the integral
   $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
-  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. The function
-  $$ \Gamma(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0 $$
-
-  Let $\psi \coloneqq v f$. By Green's theorem we have
+  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\psi \coloneqq v f$ and
+  $$ \Gamma(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
+  By Green's second identity we have
   \begin{align*}
-    \int_\D \Gamma \Delta \psi - \psi \Delta \Gamma \lambda^2 = \int_\T \Gamma(\zeta) \frac{\partial \psi}{\partial \zeta}(\zeta) - \psi(\zeta) \frac{\partial \Gamma}{\partial \zeta}(\zeta) \diff \mu(\zeta)
+    \int_\D \Gamma \Delta \psi - \psi \Delta \Gamma \diff \lambda^2 = \int_\T \Gamma \frac{\partial \psi}{\partial r} - \psi \frac{\partial \Gamma}{\partial r} \diff \mu,
   \end{align*}
+  where $\frac{\partial}{\partial r}$ denotes the radial derivative.
+  Since $\restr{\Gamma}{\T} = 0$ and $\restr{\frac{\partial \Gamma}{\partial r}}{\T} = \frac{1}{2 \pi}$ the right integral equals
+  $$ -\frac{1}{2 \pi} \int_\T v f \diff \mu $$
+  Since distributionally $\Delta \Gamma$ equals $\delta_0$, the delta distribution at 0, we have
+  $$ \int_\D \psi \Delta \Gamma \diff \lambda^2 = \psi(0) = v(0) f(0) = 0. $$
+  Finally,
+  $$ \Delta \psi = \Delta (v f) = 4 \wirtz \wirtzbar (v f) = 4 \wirtz (v \wirtzbar f + f \wirtzbar v) = 4\wirtz(f u) = 4(f \partial u + u f'). $$
+  We thus obtain
   \begin{align*}
-    \int_\D \Gamma \Delta \psi \diff \lambda^2 - \psi(0) = -\int_\T \psi \nabla \Gamma \diff \mu
+    \frac{1}{2 \pi} \int_\T v f \diff \mu &= -4 \int_\D \Gamma \left( f \partial u + u f' \right) \diff \lambda^2 = \\ 
+    &= -4 \left( \int_\D f \, \partial u \, \Gamma \diff \lambda^2 + \int_\D u f' \Gamma \diff \lambda^2 \right) \eqqcolon -4 (I_1 + I_2).
   \end{align*}
-
+  Our goal is to show the existence of a constant $C_{n,\delta}$ such that
+  $$ \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
 \end{innerproof}
 
 \section{Integral estimates}
@@ -420,7 +431,7 @@ We summarize the characterisation of Hardy spaces:
 \begin{lemma}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
   \begin{enumerate}
-    \item $ \displaystyle \int_\D \vert f' \vert^2 \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq \frac{\pi}{2} \Vert f \Vert_2^2 $
+    \item $ \displaystyle \int_\D \vert f' \vert^2 \Gamma \diff \lambda^2 \leq ? \Vert f \Vert_2^2 $
     \item $ \displaystyle \int_\D \vert f g' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2^2 \Vert g \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f g u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty $
@@ -431,9 +442,11 @@ We summarize the characterisation of Hardy spaces:
 
 \begin{proof} {\ }
   \begin{enumerate}
-    \item Applying Green's formula on $f \bar{f}$ yields
-    $$ \int_\D (\log \frac{1}{\vert z \vert} \Delta (f \bar{f}) - f \bar{f}) $$
-    $$ \vert f(0) \vert^2 = \frac{1}{2 \pi} \int_0^{2 \pi} \vert f^*(e^{i \vartheta}) \vert^2 \diff \vartheta - \frac{1}{2 \pi} \int_\D \Delta(f \bar{f}) \log \frac{1}{\vert z \vert} \diff \lambda^2 $$
+    \item Applying Green's formula on $f \bar{f}$ and $\Gamma$ yields
+    $$ \int_\D \Gamma \Delta (f \bar{f}) - f \bar{f} \Delta \Gamma \diff \lambda^2 = \int_\T \Gamma \frac{\partial}{\partial r} (f \bar{f}) - f \bar{f} \frac{\partial}{\partial r} \Gamma \diff \mu, $$
+    or, simplified,
+    $$ \int_\D \Gamma \Delta (f \bar{f}) \diff \lambda^2 - \vert f(0) \vert^2 = \int_\T \vert f \vert^2 \diff \mu = \Vert f \Vert_2^2 $$
+
     Since
     \begin{align*}
       \Delta(f \bar{f}) &= 4 \partial \wirtzbar (f \bar{f}) = 4 \partial ( \bar{f} \cdot \wirtzbar f + f \cdot \wirtzbar \bar{f} ) = 4 \partial (f \cdot \wirtzbar \bar{f}) = 4 (\partial f \cdot \wirtzbar \bar{f} + f \cdot \wirtzbar \partial \bar{f}) = \\
