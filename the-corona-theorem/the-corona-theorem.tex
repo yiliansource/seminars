@@ -308,10 +308,19 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
     \end{align*}
     and therefore $g_j \in \ran P_{2,1}$.
     \item For given $v \in C^\infty(\cl{\D})$ we want to solve the partial differential equation
-    $$ \frac{\partial u}{\partial \bar{z}} = v $$
-    for some $u \in C^\infty(\cl{\D})$.
-
-    \dots
+    $$ \frac{\partial u}{\partial \bar{z}} = v \quad \textrm{(on $\cl\D$)} $$
+    for some $u \in C^\infty(\cl{\D})$. We will approach this using a fundamental solution of the differential operator $\wirtzbar$. Recall that
+    $$ \Gamma(z) \coloneqq \frac{1}{2 \pi} \log \vert z \vert $$
+    is a fundamental solution of the Laplace operator, that is we have $\Delta \Gamma = \delta_0$ distributionally, where $\delta_0$ denotes the delta distribution at 0. We claim that $\frac{1}{\pi z}$ is a fundamental solution of $\wirtzbar$, and verify this via
+    \begin{align*}
+      \wirtzbar \frac{1}{z} &= \wirtzbar \frac{\bar{z}}{\vert z \vert^2} = \frac{1}{2} (\partial_x + i \partial_y) \frac{x - i y}{x^2 + y^2} = \\
+      &= \frac{1}{2} \left[ \partial_x \frac{x}{x^2 + y^2} - i \partial_x \frac{y}{x^2 + y^2} + i \partial_y \frac{x}{x^2 + y^2} + \partial_y \frac{y}{x^2 + y^2} \right] = \\
+      &= \frac{1}{2} \left[ \partial^2_x \log \vert z \vert + \partial^2_y \log \vert z \vert + i \left( \frac{2xy}{x^2 + y^2} - \frac{2xy}{x^2 + y^2} \right) \right] = \\
+      &= \frac{1}{2} \Delta \log \vert z \vert = \frac{1}{2} 2 \pi \delta_0 = \pi \delta_0.
+    \end{align*}
+    Now let $\Omega \supset \cl{\D}$ be open such that $v \in C^\infty(\Omega)$ and choose $\varphi \in C_c^\infty(\Omega)$ such that $\restr{\varphi}{\cl{\D}} = 1$. Then $\varphi v \in C_c^\infty(\Omega)$, therefore
+    $$ u(w) \coloneqq \left(\frac{1}{\pi z} \ast \varphi v\right)(w) = \frac{1}{\pi} \int_\Omega \frac{\varphi(z) v(z)}{w - z} \diff \lambda^2(z) $$
+    is a classical solution of $\wirtzbar u = \varphi v$ in $\Omega$. Since $\varphi v = v$ on $\cl{\D}$, we get $\wirtzbar u = v$ on $\cl\D$, as desired.
 
     Arguing pointwise shows the surjectivity of the maps $\wirtzbar : C_\ell \to C_\ell$ for $\ell = 0, 1$. For $\ell = 2$ and given $b = (b_{jk})_{j,k=1}^n \in C_2$ we first solve
     $$ \wirtzbar a_{jk} = b_{jk}, \quad \textrm{for} \quad 1 \leq j < k \leq n $$
@@ -337,16 +346,16 @@ Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \
 $$ \int_\T f \diff \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \diff \vartheta. $$
 We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
 \begin{align*}
-  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \diff \mu \right)^{1/p}, \quad 1 \leq p < \infty, \\
-  &\Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
+  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \diff \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
 \end{align*}
-
-For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
-$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_{-\pi}^{\pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
 $$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} f(e^{i \vartheta}) e^{-i n \vartheta} \diff \vartheta. $$
 
-We define $H_0^1$ as the (closed) subspace of all $f \in H^1$, for which $f(0) = 0$.
+For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_{-\pi}^{\pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+It is of note that convergence in the Hardy spaces implies compact convergence.
+
+We define $H_0^p$ as the (closed) subspace of all $f \in H^p$, for which $f(0) = 0$.
 
 We summarize the characterisation of Hardy spaces:
 \begin{theorem} Let $1 \leq p \leq \infty$. Then:
@@ -404,23 +413,23 @@ We summarize the characterisation of Hardy spaces:
 
   We want to redescribe the integral
   $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
-  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\psi \coloneqq v f$ and
-  $$ \Gamma(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
+  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
+  $$ \varphi(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
   By Green's second identity we have
   \begin{align*}
-    \int_\D \Gamma \Delta \psi - \psi \Delta \Gamma \diff \lambda^2 = \int_\T \Gamma \frac{\partial \psi}{\partial r} - \psi \frac{\partial \Gamma}{\partial r} \diff \mu,
+    \int_\D \sigma \Delta \varphi - \varphi \Delta \sigma \diff \lambda^2 = \int_\T \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \diff \mu,
   \end{align*}
   where $\frac{\partial}{\partial r}$ denotes the radial derivative.
-  Since $\restr{\Gamma}{\T} = 0$ and $\restr{\frac{\partial \Gamma}{\partial r}}{\T} = \frac{1}{2 \pi}$ the right integral equals
-  $$ -\frac{1}{2 \pi} \int_\T v f \diff \mu $$
-  Since distributionally $\Delta \Gamma$ equals $\delta_0$, the delta distribution at 0, we have
-  $$ \int_\D \psi \Delta \Gamma \diff \lambda^2 = \psi(0) = v(0) f(0) = 0. $$
+  Since $\restr{\varphi}{\T} = 0$ and $\restr{\frac{\partial \varphi}{\partial r}}{\T} = \frac{1}{2 \pi}$ the right integral equals
+  $$ \frac{1}{2 \pi} \int_\T v f \diff \mu $$
+  Since distributionally $\Delta \varphi$ equals $\delta_0$, the delta distribution at 0, we have
+  $$ \int_\D \sigma \Delta \varphi \diff \lambda^2 = \sigma(0) = v(0) f(0) = 0. $$
   Finally,
-  $$ \Delta \psi = \Delta (v f) = 4 \wirtz \wirtzbar (v f) = 4 \wirtz (v \wirtzbar f + f \wirtzbar v) = 4\wirtz(f u) = 4(f \partial u + u f'). $$
-  We thus obtain
+  $$ \Delta \sigma = \Delta (v f) = 4 \wirtz \wirtzbar (v f) = 4 \wirtz (v \wirtzbar f + f \wirtzbar v) = 4\wirtz(f u) = 4(f \partial u + u f'). $$
+  With $\psi \coloneqq -\varphi = \frac{1}{2\pi} \log \frac{1}{\vert z \vert}$ we thus obtain
   \begin{align*}
-    \frac{1}{2 \pi} \int_\T v f \diff \mu &= -4 \int_\D \Gamma \left( f \partial u + u f' \right) \diff \lambda^2 = \\ 
-    &= -4 \left( \int_\D f \, \partial u \, \Gamma \diff \lambda^2 + \int_\D u f' \Gamma \diff \lambda^2 \right) \eqqcolon -4 (I_1 + I_2).
+    \frac{1}{2 \pi} \int_\T v f \diff \mu &= 4 \int_\D \psi \left( f \partial u + u f' \right) \diff \lambda^2 = \\ 
+    &= 4 \left( \int_\D f \, \partial u \, \psi \diff \lambda^2 + \int_\D u f' \psi \diff \lambda^2 \right) \eqqcolon 4 (I_1 + I_2).
   \end{align*}
   Our goal is to show the existence of a constant $C_{n,\delta}$ such that
   $$ \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
@@ -431,7 +440,7 @@ We summarize the characterisation of Hardy spaces:
 \begin{lemma}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
   \begin{enumerate}
-    \item $ \displaystyle \int_\D \vert f' \vert^2 \Gamma \diff \lambda^2 \leq ? \Vert f \Vert_2^2 $
+    \item $ \displaystyle \int_\D \vert f' \vert^2 \psi \diff \lambda^2 \leq ? \Vert f \Vert_2^2 $
     \item $ \displaystyle \int_\D \vert f g' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2^2 \Vert g \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f g u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty $
     \item $ \displaystyle \int_\D \vert f u' v' \vert \log \frac{1}{\vert z \vert} \diff \lambda^2 \leq 2 \pi \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty $
@@ -442,10 +451,10 @@ We summarize the characterisation of Hardy spaces:
 
 \begin{proof} {\ }
   \begin{enumerate}
-    \item Applying Green's formula on $f \bar{f}$ and $\Gamma$ yields
-    $$ \int_\D \Gamma \Delta (f \bar{f}) - f \bar{f} \Delta \Gamma \diff \lambda^2 = \int_\T \Gamma \frac{\partial}{\partial r} (f \bar{f}) - f \bar{f} \frac{\partial}{\partial r} \Gamma \diff \mu, $$
+    \item Applying Green's formula on $f \bar{f}$ and $\psi$ yields
+    $$ \int_\D \psi \Delta (f \bar{f}) - f \bar{f} \Delta \psi \diff \lambda^2 = \int_\T \psi \frac{\partial}{\partial r} (f \bar{f}) - f \bar{f} \frac{\partial}{\partial r} \psi \diff \mu, $$
     or, simplified,
-    $$ \int_\D \Gamma \Delta (f \bar{f}) \diff \lambda^2 - \vert f(0) \vert^2 = \int_\T \vert f \vert^2 \diff \mu = \Vert f \Vert_2^2 $$
+    $$ \int_\D \psi \Delta (f \bar{f}) \diff \lambda^2 + \vert f(0) \vert^2 = \int_\T \vert f \vert^2 \diff \mu = \Vert f \Vert_2^2 $$
 
     Since
     \begin{align*}
