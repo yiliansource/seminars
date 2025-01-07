@@ -108,6 +108,8 @@
 \DeclareMathOperator*{\supp}{supp}
 \DeclareMathOperator*{\Hol}{Hol}
 
+\newcommand{\todo}[1][Todo.]{{\color{red} #1}}
+
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -342,6 +344,8 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 
 \section{Hardy Spaces}
 
+\todo[I'm not loving this introduction yet.]
+
 Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a function $f : \T \to \C$ it holds that
 $$ \int_\T f \diff \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \diff \vartheta. $$
 We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
@@ -406,14 +410,13 @@ We summarize the characterisation of Hardy spaces:
     \end{align*}
 \end{innerproof}
 
-\begin{proof}
-\end{proof}
+\todo[Why last equality?]
 
 \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
 
   We want to redescribe the integral
   $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
-  where $v \in L^\infty(\T)$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
+  where $v \in C^\infty(\cl{\D})$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
   $$ \varphi(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
   By Green's second identity we have
   \begin{align*}
