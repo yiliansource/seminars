@@ -353,17 +353,17 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 
 \todo[I'm not loving this introduction yet.]
 
-Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a function $f : \T \to \C$ it holds that
+Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a measurable function $f : \T \to \C$ it holds that
 $$ \int_\T f \diff \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \diff \vartheta. $$
 We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
 \begin{align*}
   &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \diff \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
 \end{align*}
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
-$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} f(e^{i \vartheta}) e^{-i n \vartheta} \diff \vartheta. \quad \textrm{\todo[Really???]} $$
+$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_\T f(\xi) \xi^{-n} \diff \mu(\xi). $$
 
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
-$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_{-\pi}^{\pi} \vert f(r e^{i \vartheta}) \vert^p \diff \vartheta \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_\T \vert f(r \xi) \vert^p \diff \mu(\xi) \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
 It is of note that convergence in the Hardy spaces implies compact convergence.
 
 We define $H_0^p$ as the (closed) subspace of all $f \in H^p$, for which $f(0) = 0$.
@@ -373,16 +373,23 @@ We summarize the characterisation of Hardy spaces:
   \begin{enumerate}
     \item $H^p$ is a Banach space\footnote{In particular, $H^\infty$ is a Banach algebra, which we already used in the introduction.}.
     \item For $p \leq q \leq \infty$ it holds that $H^p \supseteq H^q$.
-    \item Let $f \in H^p$, then for almost all $e^{i \vartheta} \in \T$ the limit
-    $$ \lim_{r \to 1} f(re^{i \vartheta}) \eqqcolon f^*(e^{i \vartheta}) $$
-    exists and defines a function in $L^p(\T)$, also called the \emph{boundary values} of $f$.
+    \item Let $f \in H^p$, then for almost all $\xi \in \T$ the limit
+    $$ \lim_{r \to 1} f(r\xi) \eqqcolon f^*(\xi) $$
+    exists and defines a function in $L^p(\T)$, also called the \emph{boundary values} of $f$. If $p < \infty$, we also have $ \lim_{r \to 1} \Vert f^* - f_r \Vert_p = 0 $, where $f_r(\xi) \coloneqq f(r \xi)$.
     \item The map ${}^* : f \mapsto f^*$ is an isometry from $H^p$ onto
     $$ L^p_+(\T) \coloneqq \{ f \in L^p(\T) : \forall n < 0: \hat{f}(n) = 0 \}, $$
     which is a closed subspace of $L^p(\T)$.
     \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
-    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \diff \mu(\zeta), \quad z \in \D $$
+    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \diff \zeta, \quad z \in \D $$
   \end{enumerate}
 \end{theorem}
+
+We will also use the following lemma:
+
+\begin{lemma}
+  Let $f \in \Hol(\D)$, then there exist $g_1, g_2 \in \Hol(\D)$ such that
+  $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
+\end{lemma}
 
 \begin{lemma}
   The map
@@ -398,10 +405,10 @@ We summarize the characterisation of Hardy spaces:
   Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / ((H_0^1)^*)^\perp$ via
   $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / ((H_0^1)^*)^\perp,\; g \in (H_0^1)^*. $$
   It remains to show that $((H_0^1)^*)^\perp = (H^\infty)^*$. Let $w^* \in ((H_0^1)^*)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
-  $$ 0 = \langle w^*, (z^n)^* \rangle = \langle w^*, e^{i n t} \rangle = \widehat{w^*}(-n). $$
+  $$ 0 = \langle w^*, (z^n)^* \rangle = \langle w^*, z^n \rangle = \widehat{w^*}(-n). $$
   Therefore $w^* \in L_+^\infty(\T) = (H^\infty)^*$. For the other inclusion let $w^* \in (H^\infty)^*$ and $h^* \in (H_0^1)^*$, then
   \begin{align*}
-    \langle w^*, h^* \rangle &= \frac{1}{2\pi} \int_0^{2 \pi} w^*(e^{i \vartheta}) h^*(e^{i \vartheta}) \diff \vartheta = \lim_{r \to 1} \frac{1}{2\pi} \int_0^{2 \pi} w(r e^{i \vartheta}) h(r e^{i \vartheta}) \diff \vartheta = \\
+    \langle w^*, h^* \rangle &= \frac{1}{2\pi} \int_0^{2 \pi} w^*(e^{i \vartheta}) h^*(e^{i \vartheta}) \diff \vartheta = \lim_{r \to 1} \frac{1}{2\pi} \int_0^{2 \pi} w(r e^{i \vartheta}) h(r e^{i \vartheta}) \frac{ie^{i \vartheta}}{ie^{i \vartheta}} \diff \vartheta = \\
     &= \lim_{r \to 1} \frac{1}{2\pi i} \int_\T \frac{w_r(\zeta) h_r(\zeta)}{\zeta} \diff \zeta = \lim_{r \to 1} w_r(0) h_r(0) = 0,
   \end{align*}
   where the second-to-last equation follows since $w_r h_r \in \Hol(\cl{\D})$ and the last one since $h(0) = 0$. Therefore $w^* \in ((H_0^1)^*)^\perp$, concluding the proof.
@@ -410,18 +417,14 @@ We summarize the characterisation of Hardy spaces:
 \begin{innerproof}[Proof (continued)]
     \todo[Need to elaborate where $v$ comes from.]
 
-    \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$:
+    \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$ as
     \begin{align*}
-      \Vert v + (H^\infty)^* \Vert_\infty &= \Vert \Phi(v + (H^\infty)^*) \Vert = \\
-      &= \sup \{ \vert \Phi(v + (H^\infty)^*)(f) \vert : f \in (H_0^1)^*, \Vert f \Vert_1 \leq 1 \} = \\
-      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_\T v f^* \diff \mu \right\vert : f \in H_0^1, \Vert f \Vert_1 \leq 1 \right\} = \\
-      &= \sup \left\{ \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert : f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1 \right\}
+      \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{f \in (H_0^1)^* \\ \Vert f \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(f) \vert = \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f^* \diff \mu \right\vert = \\
+      &= \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v f_r \diff \mu \right\vert = \sup_{\substack{f \in \Hol(\cl{\D}) \\ f(0) = 0, \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert.
     \end{align*}
 \end{innerproof}
 
-\todo[Why last equality?]
-
-\begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
+  \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
 
   We want to redescribe the integral
   $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
