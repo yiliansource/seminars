@@ -209,7 +209,11 @@ Over the following sections we will prove a stronger version of the right statem
 \end{theorem}
 
 \begin{innerproof}
-  We will give the proof in multiple steps.
+  We will give the proof in multiple steps. First, for a closed set $A \subset \C$ and a space of differentiable functions on an open set $\Omega \supset A$, say $D(\Omega)$, we define
+  \begin{equation*}
+    D(A) \coloneqq \bigcup_{\Omega \supset A \textrm{ open}} T(D(\Omega)), \quad \textrm{where} \quad T(f) \coloneqq \restr{f}{A}.
+  \end{equation*}
+  We will make use of this to handle smooth or holomorphic functions on closed sets.
 
   \textit{Step 1 (Reduction to $f_1, \dots, f_n \in \Hol(\cl{\D})$):} Assume that the statement of the theorem holds for all $\widetilde{f_1}, \dots, \widetilde{f_n} \in \Hol(\cl{\D})$, we claim that it then also holds in its original form\footnote{Note that this does \textbf{not} mean that we can assume $f_1, \dots, f_n \in \Hol(\cl{\D})$ in the previous proposition.}. For our given $f_1, \dots, f_n$ satisfying the premise of the theorem and all $0 < s < 1$ we define $ f_{j,s}(z) \coloneqq f_{j}(sz), \, j=1,\dots,n $. Then for every $0 < s < 1$ and $j = 1, \dots, n$ the function $f_{j,s}$ is in $\Hol(\cl{\D})$ and satisfies the premise of the theorem. By our assumption there exist $g_{j,s} \in H^\infty, \, j=1,\dots,n$ such that
   $$ \Vert g_{j,s} \Vert_\infty \leq C_{n,\delta}, \hspace{0.5em} j = 1, \dots, n, \quad \textrm{and} \quad \sum_{j=1}^n f_{j,s} g_{j,s} = 1. $$
@@ -265,7 +269,8 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 \end{remark}
 
 \begin{innerproof}[Proof (continued)]
-  \textit{Step 3 (The Koszul complex):} We consider the spaces
+  \textit{Step 3 (The Koszul complex):}
+  We consider the spaces
   \begin{equation*}
     C_0 \coloneqq C^\infty(\overline{\D}), \quad C_1 \coloneqq (C_0)^n, \quad C_2 \coloneqq \{ A \in (C_0)^{n \times n} : A = -A^T \}
   \end{equation*}
@@ -273,7 +278,9 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   \begin{align*}
     P_{1,0} : C_1 \to C_0,\, (g_j)_{j=1}^n \,\mapsto\, \sum_{j=1}^n g_j f_j, \quad P_{2,1} : C_2 \to C_1,\, (g_{jk})_{j,k=1}^n \,\mapsto\, \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n.
   \end{align*}
-  Applying $\wirtzbar$ pointwise in $C_j, j = 0, 1, 2$, the resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
+  We also consider the operator $\wirtzbar : C_0 \to C_0$. It is well-defined, since if $f_1 \in C^\infty(\Omega_1), f_2 \in C^\infty(\Omega_2)$ with $f_1 = f_2$ on $\cl{\D}$, then in particular $f_1 = f_2$ on $\D$ and therefore $\wirtzbar f_1 = \wirtzbar f_2$ on $\D$. By continuity, we therefore also get $\wirtzbar f_1 = \wirtzbar f_2$ on $\cl{\D}$.
+
+  Applying $\wirtzbar$ pointwise in $C_1$ and $C_2$ as well, the resulting connections are visualized in the diagram below, called the \emph{Koszul complex}:
   \begin{center}
     \begin{tikzcd}[row sep=large,column sep=large]
       C_2 \arrow[r, "P_{2,1}"] \arrow[d, "\wirtzbar", swap] & C_1 \arrow[r, "P_{1,0}"] \arrow[d, "\wirtzbar", swap] & C_0 \arrow[d, "\wirtzbar", swap] \\
