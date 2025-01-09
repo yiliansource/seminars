@@ -68,7 +68,7 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\El}{\mathcal{L}}
 \newcommand{\1}{\mathds{1}}
-\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
 \newcommand{\clspan}{\mathrm{clspan}}
 \newcommand{\mapping}[3]{
   \ensuremath{
@@ -150,12 +150,12 @@
 %   \scshape{Ian Hornik}
 % \end{center}
 
-$(s_n)_{n=0}^\infty$ Folge in $\R$ (Daten). Dann $\exists \mu$ pos. Maß (und alle Momente existieren), $\forall n \in \N : s_n = \int_\R t^n \diff \mu$ (Lösung).
+$(s_n)_{n=0}^\infty$ Folge in $\R$ (Daten). Dann $\exists \mu$ pos. Maß (und alle Momente existieren), $\forall n \in \N : s_n = \int_\R t^n \dd \mu$ (Lösung).
 
 Idee: Man baut sich ein Operator-Modell und stellt fest, dass ein gewisser Teil von diesem Operatormodell schon durch die Daten festgelegt ist. Wir wollen also diesen Teil erweitern und damit eine Lösung erhalten.
 
 \begin{enumerate}
-  \item Sei $\mu$ ein positives Maß af $\R$ mit $\forall n \in \N : \int_R \vert t \vert^n \diff \mu < \infty$.
+  \item Sei $\mu$ ein positives Maß af $\R$ mit $\forall n \in \N : \int_R \vert t \vert^n \dd \mu < \infty$.
   $$ \rightsquigarrow \langle L^2(\mu), M_t, 1 \rangle, $$
   wobei $M_t$ den Multiplikationsoperator mit $t$ bezeichnet und $1$ die konstante $1$-Funktion. Wir haben also einen Hilbertraum $(L^2(\mu))$, einen selbstadjungierten Operator $(M_t)$ und das Element $1$. Dieses ist ``nicht nur'' ein Element, sondern ein erzeugendes Element in dem Sinn, dass $\mathrm{cls} \{ (M_t - z)^{-1}1 : z \in \C \setminus \R \} = L^2(\mu)$.
 
@@ -163,8 +163,8 @@ Idee: Man baut sich ein Operator-Modell und stellt fest, dass ein gewisser Teil 
 
   Wir sehen also: Hat man ein Tupel $\langle H, A, v \rangle$ bestehend aus einem Hilbertraum $H$, einem selbstadjungierten Operator $A$ und einem Element $v$, so kann man ``das $\mu$ rekonstruieren'', nämlich genau als Maß $E_{v,v}$ (endl. pos. Maß auf $\R$), wobei $E$ das Spektralmaß von $A$ bezeichnet.
 
-  \item Sei nun angenommen wir haben Daten und eine Lösung, also $\mu$ ein positives Maß auf $\R$ und $\forall n \in \N : \int_\R \vert t \vert^n \diff \mu < \infty$. Sei $s_n \coloneqq \int_\R t^n \diff \mu$. Dann erhalten wir auf $\C[z] \subseteq L^2(\mu)$ ein Skalarprodukt
-  $$ (p, q) \coloneqq \int_\R p \bar{q} \diff \mu. $$
+  \item Sei nun angenommen wir haben Daten und eine Lösung, also $\mu$ ein positives Maß auf $\R$ und $\forall n \in \N : \int_\R \vert t \vert^n \dd \mu < \infty$. Sei $s_n \coloneqq \int_\R t^n \dd \mu$. Dann erhalten wir auf $\C[z] \subseteq L^2(\mu)$ ein Skalarprodukt
+  $$ (p, q) \coloneqq \int_\R p \bar{q} \dd \mu. $$
   Dann ist
   $$ (\sum_n \alpha_n t^n, \sum_m \beta_m t^m) = \sum_{n,m} s_{n+m} \alpha_n \bar{\beta_m}. $$
   Man kennt also $\mathrm{cl} \C[t] / (\mu-\textrm{fü}) \subseteq L^2(\mu)$ sogar \emph{nur} aus $(s_n)_{n=0}^\infty$. Wir kennen also
@@ -178,7 +178,7 @@ Idee: Man baut sich ein Operator-Modell und stellt fest, dass ein gewisser Teil 
   Wir hätten allerdings gerne ein pos. semidef. Skalarprodukt, bzgl. dem $S_0$ symmetrisch ist. Das geht also z.B. falls $\forall N : \det (s_{n+m})_{n,m=0}^N \geq 0$.
 
   \item Für die Folge
-  $$ s_n \coloneqq \int_\R t^n \diff \mu $$
+  $$ s_n \coloneqq \int_\R t^n \dd \mu $$
   gilt $\forall N : \det (s_{n+m})_{n,m=0}^N \geq 0$.
 
   \item Sei $(s_n)_{n=0}^\infty$ eine Folge reeler Zahlen mit $\forall N : \det (s_{n+m})_{n,m=0}^N \geq 0$. Betrachte
@@ -188,7 +188,7 @@ Idee: Man baut sich ein Operator-Modell und stellt fest, dass ein gewisser Teil 
   in dem Sinne, dass $\iota : \C[t] \to H$ isometrisch und $\iota \circ S_0 = A \circ \iota$ (beachte $\iota(\mathrm{dom} S_0) \subseteq \mathrm{dom} A$) und $u = \iota(1)$. Setze $\mu \coloneqq E_{u, u}$, wobei $E$ das Spektralmaß von $A$ ist. Dann ist $\mu$ ein positives Maß und es gilt für $n \in \N$
   \begin{align*}
     s_n &= (t^n, 1)_{\C[t]} = (S_0^n 1, 1)_{\C[t]} = ([\iota \circ S_0^n] 1, \iota(1))_H = (A^n \iota(1), \iota(1)) = \\
-    &= (A^n u, u) = \int_\R t^n \diff E_{u, u}.
+    &= (A^n u, u) = \int_\R t^n \dd E_{u, u}.
   \end{align*}
 \end{enumerate}
 
@@ -199,10 +199,10 @@ Wir formulieren also die Fragestellung neu ...
 \end{itemize}
 ... und beantworten sie.
 
-\emph{Existenz von Lösungen}: Gegeben $(s_n)_{n=0}^\infty$ eine Folge reeller Zahlen. Dann gibt es eine positives Maß $\mu$ auf $\R$ mit $s_n = \int_\R t^n \diff \mu$ genau dann wenn für alle $N \in \N$ gilt $\det (s_{n+m})_{n,m=1}^N \geq 0$. (Dies haben wir in (5) gezeigt.)
+\emph{Existenz von Lösungen}: Gegeben $(s_n)_{n=0}^\infty$ eine Folge reeller Zahlen. Dann gibt es eine positives Maß $\mu$ auf $\R$ mit $s_n = \int_\R t^n \dd \mu$ genau dann wenn für alle $N \in \N$ gilt $\det (s_{n+m})_{n,m=1}^N \geq 0$. (Dies haben wir in (5) gezeigt.)
 
 \emph{Beschreibe alle Lösungen}: Es gibt eine Formel die Bijektion zwischen einer Menge von Parametern und Lösungsmenge herstellt (falls die Lösungsmenge mindestens zwei Elemente hat).
-$$ \int_\R = \frac{1}{z - t} \diff \mu(t) = \frac{A(z) \tau(z) + B(z)}{C(z) \tau(z) + D(z)}, $$
+$$ \int_\R = \frac{1}{z - t} \dd \mu(t) = \frac{A(z) \tau(z) + B(z)}{C(z) \tau(z) + D(z)}, $$
 wobei $A, B, C, D$ auf $\C$ analytische Funktionen sind welche durch $(s_n)_{n=0}^\infty$ gegeben sind. Der Parameter $\tau$ Parameter durchläuft $\{ f : \C^+ \to \C : \textrm{analytisch und } \Im f \geq 0 \}$.
 
 \end{document}

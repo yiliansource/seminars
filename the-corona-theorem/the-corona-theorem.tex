@@ -69,7 +69,7 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\El}{\mathcal{L}}
 \newcommand{\1}{\mathds{1}}
-\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
 \newcommand{\clspan}{\mathrm{clspan}}
 \newcommand{\mapping}[3]{
   \ensuremath{
@@ -328,7 +328,7 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
       &= \frac{1}{2} \Delta \log \vert z \vert = \frac{1}{2} 2 \pi \delta_0 = \pi \delta_0.
     \end{align*}
     Now let $\Omega \supset \cl{\D}$ be open such that $v \in C^\infty(\Omega)$ and choose $\varphi \in C_c^\infty(\Omega)$ such that $\restr{\varphi}{\cl{\D}} = 1$. Then $\varphi v \in C_c^\infty(\Omega)$, therefore
-    $$ u(w) \coloneqq \left(\frac{1}{\pi z} \ast \varphi v\right)(w) = \frac{1}{\pi} \int_\Omega \frac{\varphi(z) v(z)}{w - z} \diff \lambda^2(z) $$
+    $$ u(w) \coloneqq \left(\frac{1}{\pi z} \ast \varphi v\right)(w) = \frac{1}{\pi} \int_\Omega \frac{\varphi(z) v(z)}{w - z} \dd \lambda^2(z) $$
     is a classical solution of $\wirtzbar u = \varphi v$ in $\Omega$. Since $\varphi v = v$ on $\cl{\D}$, we get $\wirtzbar u = v$ on $\cl\D$, as desired.
 
     Arguing pointwise shows the surjectivity of the maps $\wirtzbar : C_\ell \to C_\ell$ for $\ell = 0, 1$. For $\ell = 2$ and given $b = (b_{jk})_{j,k=1}^n \in C_2$ we first solve
@@ -354,16 +354,16 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 \todo[I'm not loving this introduction yet.]
 
 Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a measurable function $f : \T \to \C$ it holds that
-$$ \int_\T f \diff \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \diff \vartheta. $$
+$$ \int_\T f \dd \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \dd \vartheta. $$
 We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
 \begin{align*}
-  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \diff \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
+  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \dd \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
 \end{align*}
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
-$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_\T f(\xi) \xi^{-n} \diff \mu(\xi). $$
+$$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_\T f(\xi) \xi^{-n} \dd \mu(\xi). $$
 
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
-$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_\T \vert f(r \xi) \vert^p \diff \mu(\xi) \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_\T \vert f(r \xi) \vert^p \dd \mu(\xi) \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
 It is of note that convergence in the Hardy spaces implies compact convergence.
 
 We define $H_0^p$ as the (closed) subspace of all $f \in H^p$, for which $f(0) = 0$.
@@ -380,13 +380,13 @@ We summarize the characterisation of Hardy spaces:
     $$ L^p_+(\T) \coloneqq \{ f \in L^p(\T) : \forall n < 0: \hat{f}(n) = 0 \}, $$
     which is a closed subspace of $L^p(\T)$.
     \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
-    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \diff \zeta, \quad z \in \D $$
+    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \dd \zeta, \quad z \in \D $$
   \end{enumerate}
 \end{theorem}
 
 We will also use the following lemma:
 
-\begin{lemma}
+\begin{lemma} \label{lem:factorisation}
   Let $f \in \Hol(\D)$, then there exist $g_1, g_2 \in \Hol(\D)$ such that
   $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
 \end{lemma}
@@ -394,22 +394,22 @@ We will also use the following lemma:
 \begin{lemma}
   The map
   \begin{equation*}
-    \Phi : L^\infty(\T) / (H^\infty)^* \to ((H_0^1)^*)',\, f + (H^\infty)^* \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_\T f g \diff \mu \right]
+    \Phi : L^\infty(\T) / (H^\infty)^* \to ((H_0^1)^*)',\, f + (H^\infty)^* \mapsto \left[ g \mapsto \frac{1}{2 \pi} \int_\T f g \dd \mu \right]
   \end{equation*}
   is an isometric isomorphism.
 \end{lemma}
 
 \begin{proof}
   We have $L^\infty(\T) \cong L^1(\T)'$ via the duality
-  $$ \langle f, g \rangle \coloneqq \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T),\; g \in L^1(\T). $$
+  $$ \langle f, g \rangle \coloneqq \frac{1}{2\pi} \int_\T f g \dd \mu, \quad f \in L^\infty(\T),\; g \in L^1(\T). $$
   Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / ((H_0^1)^*)^\perp$ via
-  $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \diff \mu, \quad f \in L^\infty(\T) / ((H_0^1)^*)^\perp,\; g \in (H_0^1)^*. $$
+  $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \dd \mu, \quad f \in L^\infty(\T) / ((H_0^1)^*)^\perp,\; g \in (H_0^1)^*. $$
   It remains to show that $((H_0^1)^*)^\perp = (H^\infty)^*$. Let $w^* \in ((H_0^1)^*)^\perp \leq L^\infty(\T)$, then for any $n \in \N$ we have
   $$ 0 = \langle w^*, (z^n)^* \rangle = \langle w^*, z^n \rangle = \widehat{w^*}(-n). $$
   Therefore $w^* \in L_+^\infty(\T) = (H^\infty)^*$. For the other inclusion let $w^* \in (H^\infty)^*$ and $h^* \in (H_0^1)^*$, then
   \begin{align*}
-    \langle w^*, h^* \rangle &= \frac{1}{2\pi} \int_0^{2 \pi} w^*(e^{i \vartheta}) h^*(e^{i \vartheta}) \diff \vartheta = \lim_{r \to 1} \frac{1}{2\pi} \int_0^{2 \pi} w(r e^{i \vartheta}) h(r e^{i \vartheta}) \frac{ie^{i \vartheta}}{ie^{i \vartheta}} \diff \vartheta = \\
-    &= \lim_{r \to 1} \frac{1}{2\pi i} \int_\T \frac{w_r(\zeta) h_r(\zeta)}{\zeta} \diff \zeta = \lim_{r \to 1} w_r(0) h_r(0) = 0,
+    \langle w^*, h^* \rangle &= \frac{1}{2\pi} \int_0^{2 \pi} w^*(e^{i \vartheta}) h^*(e^{i \vartheta}) \dd \vartheta = \lim_{r \to 1} \frac{1}{2\pi} \int_0^{2 \pi} w(r e^{i \vartheta}) h(r e^{i \vartheta}) \frac{ie^{i \vartheta}}{ie^{i \vartheta}} \dd \vartheta = \\
+    &= \lim_{r \to 1} \frac{1}{2\pi i} \int_\T \frac{w_r(\zeta) h_r(\zeta)}{\zeta} \dd \zeta = \lim_{r \to 1} w_r(0) h_r(0) = 0,
   \end{align*}
   where the second-to-last equation follows since $w_r h_r \in \Hol(\cl{\D})$ and the last one since $h(0) = 0$. Therefore $w^* \in ((H_0^1)^*)^\perp$, concluding the proof.
 \end{proof}
@@ -419,42 +419,42 @@ We will also use the following lemma:
 
     \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$ as
     \begin{align*}
-      \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{f \in (H_0^1)^* \\ \Vert f \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(f) \vert = \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f^* \diff \mu \right\vert = \\
-      &= \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v f_r \diff \mu \right\vert = \sup_{\substack{f \in \Hol(\cl{\D}) \\ f(0) = 0, \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert.
+      \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{f \in (H_0^1)^* \\ \Vert f \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(f) \vert = \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f^* \dd \mu \right\vert = \\
+      &= \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v f_r \dd \mu \right\vert = \sup_{\substack{f \in \Hol(\cl{\D}) \\ f(0) = 0, \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert.
     \end{align*}
 \end{innerproof}
 
   \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
 
   We want to redescribe the integral
-  $$ \frac{1}{2\pi} \int_\T v f \diff \mu, $$
+  $$ \frac{1}{2\pi} \int_\T v f \dd \mu, $$
   where $v \in C^\infty(\cl{\D})$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
   $$ \varphi(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
   For $\varepsilon > 0$ let $\D_\varepsilon \coloneqq \D \setminus \cl{B_\varepsilon(0)}$. By Green's second identity we have
   \begin{align*}
-    \int_{\D_\varepsilon} \sigma \Delta \varphi - \varphi \Delta \sigma \diff \lambda^2 = \int_\T \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \diff \mu - \int_{\partial B_\varepsilon(0)} \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \diff \mathcal{H}^1,
+    \int_{\D_\varepsilon} \sigma \Delta \varphi - \varphi \Delta \sigma \dd \lambda^2 = \int_\T \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \dd \mu - \int_{\partial B_\varepsilon(0)} \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \dd \mathcal{H}^1,
   \end{align*}
   where $\frac{\partial}{\partial r}$ denotes the radial derivative. Simplifying results in
   \begin{align*}
-    -\int_{\D_\varepsilon} \varphi \Delta \sigma \diff \lambda^2 = \frac{1}{2 \pi} \int_\T \sigma \diff \mu - \frac{1}{2 \pi} \int_{\partial B_\varepsilon(0)} \frac{\sigma}{\varepsilon} - \frac{\partial \sigma}{\partial r} \log \varepsilon \diff \mathcal{H}^1.
+    -\int_{\D_\varepsilon} \varphi \Delta \sigma \dd \lambda^2 = \frac{1}{2 \pi} \int_\T \sigma \dd \mu - \frac{1}{2 \pi} \int_{\partial B_\varepsilon(0)} \frac{\sigma}{\varepsilon} - \frac{\partial \sigma}{\partial r} \log \varepsilon \dd \mathcal{H}^1.
   \end{align*}
   By the intermediate value theorem for integrals for any $\varepsilon > 0$ there exists a $\zeta_\varepsilon \in \partial B_\varepsilon(0)$ such that
   \begin{align*}
-    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \sigma \diff \mathcal{H}^1 = \sigma(\zeta_\varepsilon) \to \sigma(0) = v(0) f(0) = 0.
+    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \sigma \dd \mathcal{H}^1 = \sigma(\zeta_\varepsilon) \to \sigma(0) = v(0) f(0) = 0.
   \end{align*}
   Furthermore $\left\vert \frac{\partial \sigma}{\partial r} \right\vert \leq M$ on $\cl{\D}$ for some $M > 0$, thus
   \begin{align*}
-    \frac{1}{2\pi} \int_{\partial B_\varepsilon(0)} \left\vert \frac{\partial \sigma}{\partial r} \log \varepsilon \right\vert \diff \mathcal{H}^1 \leq M \varepsilon \log \varepsilon \to 0.
+    \frac{1}{2\pi} \int_{\partial B_\varepsilon(0)} \left\vert \frac{\partial \sigma}{\partial r} \log \varepsilon \right\vert \dd \mathcal{H}^1 \leq M \varepsilon \log \varepsilon \to 0.
   \end{align*}
   Finally,
   $$ \Delta \sigma = \Delta (v f) = 4 \wirtz \wirtzbar (v f) = 4 \wirtz (v \wirtzbar f + f \wirtzbar v) = 4\wirtz(f u) = 4(f \partial u + u f'). $$
   With $\psi \coloneqq -\varphi = \frac{1}{2\pi} \log \frac{1}{\vert z \vert}$ we thus obtain
   \begin{align*}
-    \frac{1}{2 \pi} \int_\T v f \diff \mu &= 4 \int_\D \psi \left( f \partial u + u f' \right) \diff \lambda^2 = \\ 
-    &= 4 \left( \int_\D f \, \partial u \, \psi \diff \lambda^2 + \int_\D u f' \psi \diff \lambda^2 \right) \eqqcolon 4 (I_1 + I_2).
+    \frac{1}{2 \pi} \int_\T v f \dd \mu &= 4 \int_\D \psi \left( f \partial v + v f' \right) \dd \lambda^2 = \\ 
+    &= 4 \left( \int_\D f \, \partial v \, \psi \dd \lambda^2 + \int_\D v f' \psi \dd \lambda^2 \right) \eqqcolon 4 (I_1 + I_2).
   \end{align*}
   Our goal is to show the existence of a constant $C_{n,\delta}$ such that
-  $$ \left\vert \frac{1}{2 \pi} \int_\T v f \diff \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
+  $$ \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
 \end{innerproof}
 
 \section{Integral estimates}
@@ -462,12 +462,12 @@ We will also use the following lemma:
 \begin{lemma}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
   \begin{enumerate}
-    \item $ \displaystyle \int_\D \vert f' \vert^2 \psi \diff \lambda^2 \leq \frac{1}{4} \Vert f \Vert_2^2 $
-    \item $ \displaystyle \int_\D \vert f g' \vert \psi \diff \lambda^2 \leq \Vert f \Vert_2^2 \Vert g \Vert_\infty $
-    \item $ \displaystyle \int_\D \vert f g u' v' \vert \psi \diff \lambda^2 \leq \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty $
-    \item $ \displaystyle \int_\D \vert f u' v' \vert \psi \diff \lambda^2 \leq \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty $
-    \item $ \displaystyle \int_\D \vert f g' u' \vert \psi \diff \lambda^2 \leq \frac{1}{2} \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty $
-    \item $ \displaystyle \int_\D \vert f' u' \vert \psi \diff \lambda^2 \leq \Vert f \Vert_1 \Vert u \Vert_\infty $
+    \item $ \displaystyle \int_\D \vert f' \vert^2 \psi \dd \lambda^2 \leq \frac{1}{4} \Vert f \Vert_2^2 $
+    \item $ \displaystyle \int_\D \vert f g' \vert^2 \psi \dd \lambda^2 \leq \Vert f \Vert_2^2 \Vert g \Vert_\infty^2 $
+    \item $ \displaystyle \int_\D \vert f g u' v' \vert \psi \dd \lambda^2 \leq \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty $
+    \item $ \displaystyle \int_\D \vert f u' v' \vert \psi \dd \lambda^2 \leq \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty $
+    \item $ \displaystyle \int_\D \vert f g' u' \vert \psi \dd \lambda^2 \leq \frac{1}{2} \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty $
+    \item $ \displaystyle \int_\D \vert f' u' \vert \psi \dd \lambda^2 \leq \Vert f \Vert_1 \Vert u \Vert_\infty $
   \end{enumerate}
 \end{lemma}
 
@@ -475,24 +475,57 @@ We will also use the following lemma:
   \begin{enumerate}
     \item Applying Green's formula on $f \bar{f}$ and $\psi$ yields
     \begin{align*}
-      \int_{\D_\varepsilon} \psi \Delta (f \bar{f}) - f \bar{f} \Delta \psi \diff \lambda^2 = \int_\T \psi \frac{\partial (f \bar{f})}{\partial r} - f \bar{f} \frac{\partial \psi}{\partial r} \diff \mu - \int_{\partial B_\varepsilon(0)} \psi \frac{\partial (f \bar{f})}{\partial r} - f \bar{f} \frac{\partial \psi}{\partial r} \diff \mathcal{H}^1,
+      \int_{\D_\varepsilon} \psi \Delta (f \bar{f}) - f \bar{f} \Delta \psi \dd \lambda^2 = \int_\T \psi \frac{\partial (f \bar{f})}{\partial r} - f \bar{f} \frac{\partial \psi}{\partial r} \dd \mu - \int_{\partial B_\varepsilon(0)} \psi \frac{\partial (f \bar{f})}{\partial r} - f \bar{f} \frac{\partial \psi}{\partial r} \dd \mathcal{H}^1,
     \end{align*}
     and simplifying we obtain
     \begin{align*}
-      \int_{\D_\varepsilon} \psi \Delta (f \bar{f}) \diff \lambda^2 = \frac{1}{2\pi} \int_\T \vert f \vert^2 \diff \mu + \frac{\log \varepsilon}{2\pi} \int_{\partial B_\varepsilon(0)} \frac{\partial (f \bar{f})}{\partial r} \diff \mathcal{H}^1 - \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \vert f \vert^2 \diff \mathcal{H}^1
+      \int_{\D_\varepsilon} \psi \Delta (f \bar{f}) \dd \lambda^2 = \frac{1}{2\pi} \int_\T \vert f \vert^2 \dd \mu + \frac{\log \varepsilon}{2\pi} \int_{\partial B_\varepsilon(0)} \frac{\partial (f \bar{f})}{\partial r} \dd \mathcal{H}^1 - \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \vert f \vert^2 \dd \mathcal{H}^1
     \end{align*}
     Arguing as before, taking $\varepsilon \to 0$ we get
     \begin{align*}
-      \int_\D \psi \Delta (f \bar{f}) \diff \lambda^2 = \Vert f \Vert_2^2 - \vert f(0) \vert^2.
+      \int_\D \psi \Delta (f \bar{f}) \dd \lambda^2 = \Vert f \Vert_2^2 - \vert f(0) \vert^2.
     \end{align*}
     Since
     \begin{align*}
       \Delta(f \bar{f}) &= 4 \partial \wirtzbar (f \bar{f}) = 4 \partial ( \bar{f} \cdot \wirtzbar f + f \cdot \wirtzbar \bar{f} ) = 4 \partial (f \cdot \wirtzbar \bar{f}) = 4 (\partial f \cdot \wirtzbar \bar{f} + f \cdot \wirtzbar \partial \bar{f}) = \\
-      &= 4 (\partial f \cdot \overline{\partial f} + f \cdot \wirtzbar \,\overline{ \wirtzbar f }) = 4 \partial ( f \wirtzbar \bar{f} ) = 4 \vert f' \vert^2
+      &= 4 (\partial f \cdot \overline{\partial f} + f \cdot \wirtzbar \,\overline{ \wirtzbar f }) = 4 f' \bar{f'} = 4 \vert f' \vert^2
     \end{align*}
     and $ \vert f(0) \vert^2 \geq 0$ we obtain
-    $$ \int_\D \vert f' \vert^2 \psi \diff \lambda^2 \leq \frac{1}{4} \Vert f \Vert_2^2 $$
-    and rearranging yields the desired inequality.
+    $$ \int_\D \vert f' \vert^2 \psi \dd \lambda^2 \leq \frac{1}{4} \Vert f \Vert_2^2. $$
+
+    \item We have $f g' = (f g)' - f' g$, therefore
+    \begin{align*}
+      \vert f g' \vert^2 \leq (\vert (f g)' \vert + \vert f' g \vert)^2 \leq 2(\vert (fg)' \vert^2 + \vert f' g \vert^2) \leq 2(\vert (fg)' \vert^2 + \Vert g \Vert_\infty^2 \vert f' \vert^2).
+    \end{align*}
+    Integrating and using 1. yields
+    \begin{align*}
+      \int_\D \vert f g' \vert^2 \psi \dd \lambda^2 &\leq 2 \int_\D \vert (f g)' \vert^2 \psi \dd \lambda^2 + 2 \Vert g \Vert_\infty^2 \int_\D \vert f' \vert^2 \psi \dd \lambda^2 \leq \\
+      &\leq \frac{1}{2} \Vert f g \Vert_2^2 + \frac{1}{2} \Vert f \Vert_2^2 \Vert g \Vert_\infty^2 \leq \Vert f \Vert_2^2 \Vert g \Vert_\infty^2.
+    \end{align*}
+
+    \item Consider the positive measure $\nu \coloneqq \psi \dd \lambda^2$. Invoking the Cauchy-Schwarz inequality in $L^2(\nu)$ and using 2. we get
+    \begin{align*}
+      \int_\D \vert f g u' v' \vert \psi \dd \lambda^2 &\leq \left( \int_\D \vert f u' \vert \psi \dd \lambda^2 \right)^{1/2} \left( \int_\D \vert g v' \vert \psi \dd \lambda^2 \right)^{1/2} \leq \\
+      &\leq \Vert f \Vert_2 \Vert u \Vert_\infty \Vert g \Vert_2 \Vert v \Vert_\infty.
+    \end{align*}
+
+    \item By \Cref{lem:factorisation} we can write $f = g_1 g_2$ with $\Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1$. Using 3. we then obtain
+    \begin{align*}
+      \int_\D \vert f u' v' \vert \psi \dd \lambda^2 &= \int_\D \vert g_1 g_2 u' v' \vert \psi \dd \lambda^2 \leq \\
+      &\leq \Vert g_1 \Vert_2 \Vert g_2 \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty = \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty.
+    \end{align*}
+
+    \item Using the Cauchy-Schwarz inequality in $L^2(\nu)$, as well as 1. and 2. we obtain
+    \begin{align*}
+      \displaystyle \int_\D \vert f g' u' \vert \psi \dd \lambda^2 &\leq \left( \int_\D \vert f u' \vert \psi \dd \lambda^2 \right)^{1/2} \left( \int_\D \vert g' \vert \psi \dd \lambda^2 \right)^{1/2} \leq \\
+      &\leq \Vert f \Vert_2 \Vert u \Vert_\infty \cdot \frac{1}{2} \Vert g \Vert_2 = \frac{1}{2} \Vert f \Vert_2 \Vert g \Vert_2 \Vert u \Vert_\infty.
+    \end{align*}
+
+    \item We write $f = g_1 g_2$ as in 4. and use 5. to obtain
+    \begin{align*}
+      \int_\D \vert f' u' \vert \psi \dd \lambda^2 &\leq \int_\D \vert (g_1 g_2)' u' \vert \psi \dd \lambda^2 \leq \int_\D \vert g_1' g_2 u' \vert \psi \dd \lambda^2 + \int_\D \vert g_1 g_2' u' \vert \psi \dd \lambda^2 \leq \\
+      &\leq \frac{1}{2} \Vert g_2 \Vert_2 \Vert g_1 \Vert_2 \Vert u \Vert_\infty + \frac{1}{2} \Vert g_1 \Vert_2 \Vert g_2 \Vert_2 \Vert u \Vert_\infty = \Vert f \Vert_1 \Vert u \Vert_\infty.
+    \end{align*}
   \end{enumerate}
 \end{proof}
 
