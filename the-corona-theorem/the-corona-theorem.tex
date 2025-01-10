@@ -107,6 +107,7 @@
 \DeclareMathOperator*{\trace}{trace}	
 \DeclareMathOperator*{\supp}{supp}
 \DeclareMathOperator*{\Hol}{Hol}
+\DeclareMathOperator*{\esssup}{ess.\,sup}
 
 \newcommand{\todo}[1][Todo.]{{\color{red} #1}}
 
@@ -171,7 +172,7 @@ We will denote the space of all complex-valued, bounded, analytic functions on t
 \begin{equation*}
   \pi_z : H^\infty \to \C,\; f \mapsto f(z).
 \end{equation*}
-This is clearly multiplicative, bounded and linear and therefore belongs to $\Delta(H^\infty)$. The set of all such functionals $\pi_z, z \in \D$ will be denoted as $\Delta_0$. The \emph{corona} is defined as the complement of closure of $\Delta_0$ in the Gelfand topology. The corona theorem now states:
+This is clearly multiplicative, bounded and linear and therefore belongs to $\Delta(H^\infty)$. The set of all such functionals $\pi_z, z \in \D$ will be denoted as $\Delta_0$. The \emph{corona} is defined as the complement of the closure of $\Delta_0$ in the Gelfand topology. The corona theorem now states:
 
 \begin{theorem}[L. Carleson] \label{thm:corona}
   The corona is empty. In other words, $\Delta_0$ is dense in $\Delta(H^\infty)$.
@@ -209,7 +210,7 @@ Over the following sections we will prove a stronger version of the right statem
 \end{theorem}
 
 \begin{innerproof}
-  We will give the proof in multiple steps. First, for a closed set $A \subset \C$ and a space of differentiable functions on an open set $\Omega \supset A$, say $D(\Omega)$, we define
+  We will give the proof in multiple steps. First, for a closed set $A \subset \C$ and a space of functions on an open sets $\Omega \supset A$, say $D(\Omega)$, we define
   \begin{equation*}
     D(A) \coloneqq \bigcup_{\Omega \supset A \textrm{ open}} T(D(\Omega)), \quad \textrm{where} \quad T(f) \coloneqq \restr{f}{A}.
   \end{equation*}
@@ -294,14 +295,14 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   \begin{enumerate}
     \item The diagram is commutative, that is we have $P_{j+1,j} \wirtzbar = \wirtzbar P_{j+1,j}$ for $j = 0,1$.
     \item The horizontal sequences are exact, that is $\ran P_{2,1} = \ker P_{1,0}$.
-    \item The maps $\wirtzbar : C_j \to C_j$ for $j=0,1,2$ are surjective.
+    \item The vertical maps $\wirtzbar : C_j \to C_j$ for $j=0,1,2$ are surjective.
   \end{enumerate}
 \end{lemma}
 
 \begin{proof}{\ }
   \begin{enumerate}
     \item For $g \in C_0$ and $f \in \Hol(\cl{\D})$ we have
-    $$ \frac{\partial (gf)}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} \cdot f + g \cdot \frac{\partial f}{\partial \bar{z}} = \frac{\partial g}{\partial \bar{z}} \cdot f $$
+    $$ \wirtzbar (gf) = f \wirtzbar g + g \wirtzbar f = f \wirtzbar g $$
     and together with the linearity of $\wirtzbar$ the statement follows.
     \item ``$\subseteq$'': Let $g \in C_2, g = (g_{jk})_{j,k=1}^n$, then
     $$ P_{1,0} P_{2,1} g = P_{1,0} \left[ \left( \sum_{k=1}^n g_{jk} f_k \right)_{j=1}^n \right] = \sum_{j=1}^n \sum_{k=1}^n g_{jk} f_k f_j = 0 $$
@@ -346,27 +347,43 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   $$ \wirtzbar g = \wirtzbar h - \wirtzbar P_{2,1} a = \wirtzbar h - P_{2,1} b = 0. $$
   Therefore $g$ is a solution to
   $$ \sum_{k=1}^n f_k g_k = 1 $$
-  in $\Hol(\cl{\D})$. However, we do not have an estimate on $\vert g_j \vert$ yet.
+  in $\Hol(\cl{\D})$. However, we do not have an estimate on $\vert g_j \vert$ yet. Recall that, explicitely,
+  $$ g_j = h_j - \sum_{k=1}^n a_{jk} f_k, $$
+  where $a_{jk} \in C^\infty(\cl{\D})$ is a solution of the partial differential equation
+  $$ \Wirtzbar[u] = \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1} \left( \Wirtzbar[h_j] \bar{f_k} - \Wirtzbar[h_k] \bar{f_j} \right). $$
+  We want to show that the solution $a_{jk}$ can be chosen in a way, that the resulting functions $g_j \in \Hol(\cl{\D})$ are bounded in $\Vert \cdot \Vert_\infty$ by a constant depending only on $n$ and $\delta$, that is
+  $$ \Vert g_j \Vert_\infty \leq C_{n, \delta}. $$
+  Denote by $u_{jk}$ the right-hand side of the partial differential equation above. We fix a solution $\wirtzbar v_{jk} = u_{jk}$ and notice that if $\wirtzbar a_{jk} = u_{jk}$ is any bounded solution, then
+  $$ \wirtzbar (a_{jk} - v_{jk}) = \wirtzbar a_{jk} - \wirtzbar v_{jk} = 0, $$
+  that is the difference is bounded and holomorphic, thus in $H^\infty$. We can therefore write
+  $$ a_{jk} = v_{jk} + p, \quad p \in H^\infty. $$
+  \todo[Kann man das noch irgendwie schöner machen??] We denote the restriction of $v_{jk}$ to $\T$ by $v_{jk}$ as well, and can therefore view it as an element of $L^\infty(\T)$. We can also consider $p^* \in L^\infty(\T)$. If we therefore manage to bound
+  $$ \Vert a_{jk} \Vert_\infty = \esssup_{z \in \T} \vert a_{jk}(z) \vert \leq K_{n,\delta}, $$
+  we immediately get
+  $$ \Vert g_j \Vert_\infty = \Vert g_j^* \Vert_\infty \leq \frac{1}{\delta} + n K_{n, \delta}, $$
+  resulting in the claim of the theorem.
+
+  Note that we can fluctuate $\Vert a_{jk} \Vert_\infty$ by choosing different $p \in H^\infty$. We therefore want to bound the quantity
+  $$ \inf_{p \in H^\infty} \Vert v_{jk} + p^* \Vert_\infty, $$
+  which is precisely the norm of $v_{jk}$ in the quotient space $L^\infty(\T) / (H^\infty)^*$. To do this we will use the theory of \emph{Hardy spaces}.
 \end{innerproof}
 
 \section{Hardy Spaces}
-
-\todo[I'm not loving this introduction yet.]
 
 Let $\mu$ denote the Lebesgue measure on $\T = \{ z \in \C : \vert z \vert = 1 \}$, i.e. the measure such that for a measurable function $f : \T \to \C$ it holds that
 $$ \int_\T f \dd \mu = \int_{-\pi}^\pi f(e^{i \vartheta}) \dd \vartheta. $$
 We define the $L^p(\T)$-norms via the \emph{normed} Lebesgue measure $\frac{1}{2 \pi} \mu$:
 \begin{align*}
-  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \dd \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \mathrm{ess.\,sup\,} \vert f \vert.
+  &\Vert f \Vert_p \coloneqq \left( \frac{1}{2\pi} \int_\T \vert f \vert^p \dd \mu \right)^{1/p}, \quad \textrm{for } 1 \leq p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \esssup \vert f \vert.
 \end{align*}
 For $f \in L^1(\T)$ and $n \in \N$ we define the $n$-th \emph{Fourier coefficient} by
 $$ \hat{f}(n) \coloneqq \frac{1}{2\pi} \int_\T f(\xi) \xi^{-n} \dd \mu(\xi). $$
 
 For $1 \leq p \leq \infty$ we define the \emph{Hardy space} $H^p$ as the set of all $f \in \Hol(\D)$ with $\Vert f \Vert_p < \infty$, where
-$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_\T \vert f(r \xi) \vert^p \dd \mu(\xi) \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+$$ \Vert f \Vert_p \coloneqq \lim_{r \to 1} \left( \frac{1}{2 \pi} \int_\T \vert f_r \vert^p \dd \mu \right)^{1/p} \quad \textrm{for } p < \infty, \quad \textrm{and} \quad \Vert f \Vert_\infty \coloneqq \sup_{z \in \D} \vert f(z) \vert. $$
+Equivalently one can interchange the limit in the definition above with the supremum over $0 < r < 1$.
 It is of note that convergence in the Hardy spaces implies compact convergence.
-
-We define $H_0^p$ as the (closed) subspace of all $f \in H^p$, for which $f(0) = 0$.
+We lastly define $H_0^p$ as the (closed) subspace of all $f \in H^p$, for which $f(0) = 0$.
 
 We summarize the characterisation of Hardy spaces:
 \begin{theorem} Let $1 \leq p \leq \infty$. Then:
@@ -391,6 +408,8 @@ We will also use the following lemma:
   $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
 \end{lemma}
 
+Returning to our proof, the following lemma allows us to translate the minimization problem into a maximization problem:
+
 \begin{lemma}
   The map
   \begin{equation*}
@@ -414,19 +433,14 @@ We will also use the following lemma:
   where the second-to-last equation follows since $w_r h_r \in \Hol(\cl{\D})$ and the last one since $h(0) = 0$. Therefore $w^* \in ((H_0^1)^*)^\perp$, concluding the proof.
 \end{proof}
 
-\begin{innerproof}[Proof (continued)]
-    \todo[Need to elaborate where $v$ comes from.]
-
-    \textit{Step 5 (Dualisation):} Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$ as
+\begin{innerproof}[Proof (continued)] \textit{Step 5 (Dualisation):} \todo[We need to explain what the previous situation is.] Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$ as
     \begin{align*}
       \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{f \in (H_0^1)^* \\ \Vert f \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(f) \vert = \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f^* \dd \mu \right\vert = \\
       &= \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v f_r \dd \mu \right\vert = \sup_{\substack{f \in \Hol(\cl{\D}) \\ f(0) = 0, \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert.
     \end{align*}
 \end{innerproof}
 
-  \begin{innerproof}[Proof (continued)] \textit{Step 6:} todo
-
-  We want to redescribe the integral
+  \begin{innerproof}[Proof (continued)] \textit{Step 6:} We want to redescribe the integral
   $$ \frac{1}{2\pi} \int_\T v f \dd \mu, $$
   where $v \in C^\infty(\cl{\D})$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
   $$ \varphi(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
@@ -455,6 +469,8 @@ We will also use the following lemma:
   \end{align*}
   Our goal is to show the existence of a constant $C_{n,\delta}$ such that
   $$ \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
+
+  \todo[We still need some reformulation at the end.]
 \end{innerproof}
 
 \section{Integral estimates}
