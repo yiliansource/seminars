@@ -159,6 +159,8 @@
   \scshape{Ian Hornik}
 \end{center}
 
+\vspace{1em}
+
 These are my notes for my talk in the winter semester of 2024, in the analysis seminar at the Technical University of Vienna.
 
 % Content Summary:
@@ -252,7 +254,12 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
 \begin{remark}
   Let $\Omega \subseteq \C$ be open and $f \in C^1(\Omega)$.
   \begin{enumerate}
-    \item The Wirtinger operators are $\C$-linear, satisfy the Leibniz rule\footnote{This means that the Wirtinger opeartors are derivatives from an algebraic perspective.} and
+    \item The Wirtinger operators are $\C$-linear, satisfy the Leibniz rule\footnote{This means that the Wirtinger opeartors are derivatives from an algebraic perspective.}, the chain rule
+    \begin{align*}
+      \Wirtz (f \circ g) &= \left( \Wirtz[f] \circ g \right) \Wirtz[g] + \left( \Wirtzbar[f] \circ g \right) \Wirtz[\bar{g}], \\
+      \Wirtzbar (f \circ g) &= \left( \Wirtz[f] \circ g \right) \Wirtzbar[g] + \left( \Wirtzbar[f] \circ g \right) \Wirtzbar[\bar{g}],
+    \end{align*}
+    where $g \in C^1(\Omega), g(\Omega) \subseteq \Omega$, and are compatible with complex conjugation, as in
     $$ \overline{\left( \frac{\partial f}{\partial z} \right)} = \frac{\partial \bar{f}}{\partial \bar{z}}, \quad \overline{\left( \frac{\partial f}{\partial \bar{z}} \right)} = \frac{\partial \bar{f}}{\partial z} $$
     \item If $f \in \Hol(\Omega), f = u + iv$, then
     $$
@@ -347,25 +354,7 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
   $$ \wirtzbar g = \wirtzbar h - \wirtzbar P_{2,1} a = \wirtzbar h - P_{2,1} b = 0. $$
   Therefore $g$ is a solution to
   $$ \sum_{k=1}^n f_k g_k = 1 $$
-  in $\Hol(\cl{\D})$. However, we do not have an estimate on $\vert g_j \vert$ yet. Recall that, explicitely,
-  $$ g_j = h_j - \sum_{k=1}^n a_{jk} f_k, $$
-  where $a_{jk} \in C^\infty(\cl{\D})$ is a solution of the partial differential equation
-  $$ \Wirtzbar[u] = \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1} \left( \Wirtzbar[h_j] \bar{f_k} - \Wirtzbar[h_k] \bar{f_j} \right). $$
-  We want to show that the solution $a_{jk}$ can be chosen in a way, that the resulting functions $g_j \in \Hol(\cl{\D})$ are bounded in $\Vert \cdot \Vert_\infty$ by a constant depending only on $n$ and $\delta$, that is
-  $$ \Vert g_j \Vert_\infty \leq C_{n, \delta}. $$
-  Denote by $u_{jk}$ the right-hand side of the partial differential equation above. We fix a solution $\wirtzbar v_{jk} = u_{jk}$ and notice that if $\wirtzbar a_{jk} = u_{jk}$ is any bounded solution, then
-  $$ \wirtzbar (a_{jk} - v_{jk}) = \wirtzbar a_{jk} - \wirtzbar v_{jk} = 0, $$
-  that is the difference is bounded and holomorphic, thus in $H^\infty$. We can therefore write
-  $$ a_{jk} = v_{jk} + p, \quad p \in H^\infty. $$
-  \todo[Kann man das noch irgendwie schöner machen??] We denote the restriction of $v_{jk}$ to $\T$ by $v_{jk}$ as well, and can therefore view it as an element of $L^\infty(\T)$. We can also consider $p^* \in L^\infty(\T)$. If we therefore manage to bound
-  $$ \Vert a_{jk} \Vert_\infty = \esssup_{z \in \T} \vert a_{jk}(z) \vert \leq K_{n,\delta}, $$
-  we immediately get
-  $$ \Vert g_j \Vert_\infty = \Vert g_j^* \Vert_\infty \leq \frac{1}{\delta} + n K_{n, \delta}, $$
-  resulting in the claim of the theorem.
-
-  Note that we can fluctuate $\Vert a_{jk} \Vert_\infty$ by choosing different $p \in H^\infty$. We therefore want to bound the quantity
-  $$ \inf_{p \in H^\infty} \Vert v_{jk} + p^* \Vert_\infty, $$
-  which is precisely the norm of $v_{jk}$ in the quotient space $L^\infty(\T) / (H^\infty)^*$. To do this we will use the theory of \emph{Hardy spaces}.
+  in $\Hol(\cl{\D})$. However, we do not have an estimate on $\vert g_j \vert$ yet.
 \end{innerproof}
 
 \section{Hardy Spaces}
@@ -408,7 +397,27 @@ We will also use the following lemma:
   $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
 \end{lemma}
 
-Returning to our proof, the following lemma allows us to translate the minimization problem into a maximization problem:
+\begin{innerproof}[Proof (continued)]
+  Returning to our proof, recall that we want to obtain a bound on the functions $\Vert g_j \Vert_\infty$, where
+  $$ g_j = h_j - \sum_{k=1}^n a_{jk} f_k, $$
+  and $a_{jk} \in C^\infty(\cl{\D})$ is a solution of the partial differential equation
+  $$ \Wirtzbar[y] = \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1} \left( \Wirtzbar[h_j] \bar{f_k} - \Wirtzbar[h_k] \bar{f_j} \right). $$
+  We want to show that the solution $a_{jk}$ can be chosen in a way, that the resulting functions $g_j \in \Hol(\cl{\D})$ are bounded in the $H^\infty$-norm by a constant depending only on $n$ and $\delta$, that is
+  $$ \Vert g_j \Vert_\infty \leq C_{n, \delta}. $$
+  Denote by $u_{jk}$ the right-hand side of the partial differential equation above. We fix a solution $\wirtzbar v_{jk} = u_{jk}$ and notice that if $\wirtzbar a_{jk} = u_{jk}$ is another solution, then
+  $$ \wirtzbar (a_{jk} - v_{jk}) = \wirtzbar a_{jk} - \wirtzbar v_{jk} = 0, $$
+  that is the difference is bounded and holomorphic, thus in $H^\infty$. We can therefore write
+  $$ a_{jk} = v_{jk} + p, \quad p \in H^\infty. $$
+  We can view $a_{jk}$ as an element of $L^\infty(\T)$ by considering $\restr{v_{jk}}{\T} \in L^\infty(\T)$ and $p^* \in (H^\infty)^* \subset L^\infty(\T)$. If we manage to bound
+  $$ \Vert a_{jk} \Vert_{L^\infty(\T)} = \esssup_{z \in \T} \vert a_{jk}(z) \vert \leq K_{n,\delta}, $$
+  we immediately get
+  $$ \Vert g_j \Vert_{H^\infty} \leq \Vert h_j \Vert_{H^\infty} + \sum_{k=1}^n \Vert a_{jk} f_k \Vert_{H^\infty} \leq \frac{1}{\delta} + \sum_{k=1}^n \Vert a_{jk} \Vert_{L^\infty(\T)} \Vert f_k \Vert_{H^\infty} \leq \frac{1}{\delta} + n K_{n, \delta}, $$
+  resulting in the claim of the theorem.
+
+  Note that we can vary $\Vert a_{jk} \Vert_{L^\infty(\T)}$ by choosing different functions $p \in H^\infty$. We therefore want to bound the quantity
+  $$ \inf_{p \in H^\infty} \Vert v_{jk} + p^* \Vert_\infty, $$
+  which is precisely the norm of $v_{jk}$ in the quotient space $L^\infty(\T) / (H^\infty)^*$. The following lemma allows us to translate the minimization problem into a maximization problem.
+\end{innerproof}
 
 \begin{lemma}
   The map
@@ -432,17 +441,18 @@ Returning to our proof, the following lemma allows us to translate the minimizat
   \end{align*}
   where the second-to-last equation follows since $w_r h_r \in \Hol(\cl{\D})$ and the last one since $h(0) = 0$. Therefore $w^* \in ((H_0^1)^*)^\perp$, concluding the proof.
 \end{proof}
-
-\begin{innerproof}[Proof (continued)] \textit{Step 5 (Dualisation):} \todo[We need to explain what the previous situation is.] Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^*$ as
-    \begin{align*}
-      \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{f \in (H_0^1)^* \\ \Vert f \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(f) \vert = \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f^* \dd \mu \right\vert = \\
-      &= \sup_{\substack{f \in H_0^1 \\ \Vert f \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v f_r \dd \mu \right\vert = \sup_{\substack{f \in \Hol(\cl{\D}) \\ f(0) = 0, \Vert f \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert.
-    \end{align*}
-\end{innerproof}
-
-  \begin{innerproof}[Proof (continued)] \textit{Step 6:} We want to redescribe the integral
-  $$ \frac{1}{2\pi} \int_\T v f \dd \mu, $$
-  where $v \in C^\infty(\cl{\D})$ and $f \in \Hol(\cl{\D}), f(0) = 0, \Vert f \Vert_1 \leq 1$. Let $\sigma \coloneqq v f$ and
+  
+\begin{innerproof}[Proof (continued)]
+  \textit{Step 5 (Dualisation):} Since we longer need the indices, we now simply write $v$ instead of $v_{jk}$. Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^* \in L^\infty(\T) / (H^\infty)^*$ as
+  \begin{align*}
+    \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{F \in (H_0^1)^* \\ \Vert F \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(F) \vert = \sup_{\substack{F \in H_0^1 \\ \Vert F \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v F^* \dd \mu \right\vert = \\
+    &= \sup_{\substack{F \in H_0^1 \\ \Vert F \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v F_r \dd \mu \right\vert = \sup_{\substack{F \in \Hol(\cl{\D}) \\ F(0) = 0, \Vert F \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v F \dd \mu \right\vert.
+  \end{align*}
+  We now want to bound this supremum, where, as before, $v \in C^\infty(\cl{\D})$.
+    
+  \textit{Step 6:} We want to redescribe the integral
+  $$ \frac{1}{2\pi} \int_\T v F \dd \mu, $$
+  where $v \in C^\infty(\cl{\D})$ and $F \in \Hol(\cl{\D}), F(0) = 0, \Vert F \Vert_1 \leq 1$. Let $\sigma \coloneqq v F$ and
   $$ \varphi(z) \coloneqq \frac{1}{2\pi} \log \vert z \vert, \quad z \neq 0. $$
   For $\varepsilon > 0$ let $\D_\varepsilon \coloneqq \D \setminus \cl{B_\varepsilon(0)}$. By Green's second identity we have
   \begin{align*}
@@ -454,23 +464,36 @@ Returning to our proof, the following lemma allows us to translate the minimizat
   \end{align*}
   By the intermediate value theorem for integrals for any $\varepsilon > 0$ there exists a $\zeta_\varepsilon \in \partial B_\varepsilon(0)$ such that
   \begin{align*}
-    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \sigma \dd \mathcal{H}^1 = \sigma(\zeta_\varepsilon) \to \sigma(0) = v(0) f(0) = 0.
+    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \sigma \dd \mathcal{H}^1 = \sigma(\zeta_\varepsilon) \to \sigma(0) = v(0) F(0) = 0.
   \end{align*}
   Furthermore $\left\vert \frac{\partial \sigma}{\partial r} \right\vert \leq M$ on $\cl{\D}$ for some $M > 0$, thus
   \begin{align*}
     \frac{1}{2\pi} \int_{\partial B_\varepsilon(0)} \left\vert \frac{\partial \sigma}{\partial r} \log \varepsilon \right\vert \dd \mathcal{H}^1 \leq M \varepsilon \log \varepsilon \to 0.
   \end{align*}
   Finally,
-  $$ \Delta \sigma = \Delta (v f) = 4 \wirtz \wirtzbar (v f) = 4 \wirtz (v \wirtzbar f + f \wirtzbar v) = 4\wirtz(f u) = 4(f \partial u + u f'). $$
-  With $\psi \coloneqq -\varphi = \frac{1}{2\pi} \log \frac{1}{\vert z \vert}$ we thus obtain
+  $$ \Delta \sigma = \Delta (v F) = 4 \wirtz \wirtzbar (v F) = 4 \wirtz (v \wirtzbar F + F \wirtzbar v) = 4\wirtz(F u) = 4(F \wirtz u + u F'). $$
+  With $\psi \coloneqq -\varphi = \frac{1}{2\pi} \log \frac{1}{\vert z \vert}$, by letting $\varepsilon \to 0$ we thus obtain
   \begin{align*}
-    \frac{1}{2 \pi} \int_\T v f \dd \mu &= 4 \int_\D \psi \left( f \partial v + v f' \right) \dd \lambda^2 = \\ 
-    &= 4 \left( \int_\D f \, \partial v \, \psi \dd \lambda^2 + \int_\D v f' \psi \dd \lambda^2 \right) \eqqcolon 4 (I_1 + I_2).
+    \frac{1}{2 \pi} \int_\T v F \dd \mu &= 4 \int_\D \psi \left( F \wirtz u + u F' \right) \dd \lambda^2 = \\ 
+    &= 4 \left( \int_\D F \, \wirtz u \, \psi \dd \lambda^2 + \int_\D u F' \psi \dd \lambda^2 \right) \eqqcolon 4 (I_1 + I_2).
   \end{align*}
-  Our goal is to show the existence of a constant $C_{n,\delta}$ such that
-  $$ \left\vert \frac{1}{2 \pi} \int_\T v f \dd \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq C_{n,\delta}. $$
-
-  \todo[We still need some reformulation at the end.]
+  Our goal is to show the existence of a constant $K_{n,\delta}$ such that
+  $$ \left\vert \frac{1}{2 \pi} \int_\T v F \dd \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq K_{n,\delta}. $$
+  Recall that
+  $$ u = \tau ( \bar{f_k} \wirtzbar h_j - \bar{f_j} \wirtzbar h_k), \quad \textrm{where} \quad \tau \coloneqq \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1}. $$
+  Since $h_\ell = \tau \bar{f_\ell}$ we first calculate want to calculate $\wirtzbar \tau$. We first notice that with function $m(z) \coloneqq z^{-1}$ and any nonvanishing function $\alpha \in C^\infty$ we have by the chain rule
+  $$ \wirtz \alpha^{-1} = \wirtz (m \circ \alpha) = (\wirtz m \circ \alpha) \wirtz \alpha + (\wirtzbar m \circ \alpha) \wirtz \bar{g} = -\alpha^{-2} \partial \alpha, $$
+  and analogously $\wirtzbar \alpha^{-1} = -\alpha^{-2} \wirtzbar \alpha$. Therefore
+  \begin{align*}
+    \wirtzbar \tau &= - \tau^2 \sum_{\ell=1}^n \wirtzbar (f_\ell \bar{f_\ell}) = -\tau^2 \sum_{\ell=1}^n ( f_\ell \wirtzbar \bar{f_\ell} + \bar{f_\ell} \wirtzbar f_\ell ) = \\
+    &= -\tau^2 \sum_{\ell=1}^n f_\ell \bar{f_\ell'} \eqqcolon -\tau^2 \eta, \\
+    \wirtz \tau &= \dots = -\tau^2 \bar{\eta}.
+  \end{align*}
+  We therefore obtain $ \wirtzbar h_\ell = \tau \wirtzbar \bar{f_\ell} + \bar{f_\ell} \wirtzbar \tau = \tau ( \bar{f_\ell'} - \bar{f_\ell} \tau \eta ) $ and by that the representations
+  \begin{align*}
+    u &= \tau ( \bar{f_k} \wirtzbar h_j - \bar{f_j} \wirtzbar h_k) = \tau^2 ( \bar{f_k} \bar{f_j'} - \bar{f_k} \bar{f_j} \tau \eta - \bar{f_j} \bar{f_k'} + \bar{f_j} \bar{f_k} \tau \eta ) = \tau^2 ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ), \\
+    \partial u &= \tau^2 \partial ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ) + ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ) \partial \tau^2 = -2 \tau^3 \left( \sum_{\ell=1}^n \bar{f_\ell} f_\ell' \right) ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ).
+  \end{align*}
 \end{innerproof}
 
 \section{Integral estimates}
@@ -544,5 +567,9 @@ Returning to our proof, the following lemma allows us to translate the minimizat
     \end{align*}
   \end{enumerate}
 \end{proof}
+
+\begin{innerproof}[Proof (continued)]
+  \todo[Finish proof.]
+\end{innerproof}
 
 \end{document}
