@@ -192,7 +192,7 @@ There is an equivalent version of the theorem, as given by the following proposi
   a contradiction.
 
   For the other implication, assume towards a contradiction that $\Delta_0$ is not dense in $\Delta(H^\infty)$. Then there exists some $\phi_0 \in \Delta(H^\infty)$ and an open neighbourhood $U$ of $\phi_0$ such that $\Delta_0 \cap U = \emptyset$. Since the sets of the form
-  $$ \{ \phi \in \Delta(H^\infty) : \vert (\phi - \phi_0)(f_j) \vert < \varepsilon, j = 1, \dots, n \}, $$
+  $$ \bigcap_{j=1}^n \{ \phi \in \Delta(H^\infty) : \vert (\phi - \phi_0)(f_j) \vert < \varepsilon \}, $$
   for some $n \in \N, f_1, \dots, f_n \in H^\infty$ and $\varepsilon > 0$, form a neighbourhood basis of $\phi_0$ in the weak\nobreakdash-* topology, there exists a neighbourhood $V \subseteq U$ described by some $n \in \N, f_1, \dots, f_n \in H^\infty$ and $\delta > 0$. Define $\widetilde{f_j} \coloneqq f_j - \phi_0(f_j)$, for $j=1,\dots,n$, then clearly $\phi_0(\widetilde{f_j}) = 0$. Since $\Delta_0 \cap V = \emptyset$, for any $z \in \D$ we have $\pi_z \notin V$ and therefore there exists some $j_0 \in \{ 1, \dots, n \}$ such that,
   $$ \delta \leq \vert (\pi_z - \phi_0)(f_{j_0}) \vert = \vert f_{j_0}(z) - \phi_0(f_{j_0}) \vert = \vert \widetilde{f_{j_0}}(z) \vert. $$
   Since $\widetilde{f_j} \in H^\infty$ for $j=1,\dots,n$, and $ \sum_{j=1}^n \vert \widetilde{f_j}(z) \vert \geq \delta, $ there exist $g_1, \dots, g_n \in H^\infty$ such that $\sum_{j=1}^n \widetilde{f_j} g_j = 1$. But this yields
@@ -202,7 +202,7 @@ There is an equivalent version of the theorem, as given by the following proposi
 
 \section{First Steps}
 
-Over the following sections we will prove a stronger version of the right statement in \Cref{prop:corona-equiv}:
+Over the following sections we will prove a stronger version of the right-hand statement in \Cref{prop:corona-equiv}:
 
 \begin{theorem}
   There exist constants $C_{n,\delta}$ only depending on $n \in \N$ and $\delta > 0$, such that if $f_1, \dots f_n \in \Hol(\D)$ with
@@ -218,7 +218,7 @@ Over the following sections we will prove a stronger version of the right statem
   \end{equation*}
   We will make use of this to handle smooth or holomorphic functions on closed sets.
 
-  \textit{Step 1 (Reduction to $f_1, \dots, f_n \in \Hol(\cl{\D})$):} Assume that the statement of the theorem holds for all $\widetilde{f_1}, \dots, \widetilde{f_n} \in \Hol(\cl{\D})$, we claim that it then also holds in its original form\footnote{Note that this does \textbf{not} mean that we can assume $f_1, \dots, f_n \in \Hol(\cl{\D})$ in the previous proposition.}. For our given $f_1, \dots, f_n$ satisfying the premise of the theorem and all $0 < s < 1$ we define $ f_{j,s}(z) \coloneqq f_{j}(sz), \, j=1,\dots,n $. Then for every $0 < s < 1$ and $j = 1, \dots, n$ the function $f_{j,s}$ is in $\Hol(\cl{\D})$ and satisfies the premise of the theorem. By our assumption there exist $g_{j,s} \in H^\infty, \, j=1,\dots,n$ such that
+  \textit{Step 1 (Reduction to $f_1, \dots, f_n \in \Hol(\cl{\D})$):} Assume that the statement of the theorem holds for all $\widetilde{f_1}, \dots, \widetilde{f_n} \in \Hol(\cl{\D})$, we claim that it then also holds in its original form\footnote{Note that this does \textbf{not} mean that we can assume $f_1, \dots, f_n \in \Hol(\cl{\D})$ in the previous proposition.}. For our given $f_1, \dots, f_n$ satisfying the premise of the theorem and all $0 < s < 1$ we define $ f_{j,s}(z) \coloneqq f_{j}(sz), \, j=1,\dots,n $. Then for every $0 < s < 1$ the functions $f_{j,s}$ are in $\Hol(\cl{\D})$ and satisfy the premise of the theorem. By our assumption there exist $g_{j,s} \in H^\infty, \, j=1,\dots,n$ such that
   $$ \Vert g_{j,s} \Vert_\infty \leq C_{n,\delta}, \hspace{0.5em} j = 1, \dots, n, \quad \textrm{and} \quad \sum_{j=1}^n f_{j,s} g_{j,s} = 1. $$
   For a fixed $j \in \{ 1, \dots, n \}$, the set $\{ g_{j,s} : 0 < s < 1 \}$ is uniformly bounded and therefore normal in $\Hol(\D)$. By Montel's Theorem there exists a sequence $s_m \to 1$ and some $g_j \in \Hol(\D)$ such that $g_{j,s_m} \to g_{j}$ compactly. In particular, we obtain
   $$ \Vert g_j \Vert_\infty = \lim_{m \to \infty} \Vert g_{j,s_m} \Vert_\infty \leq C_{n,\delta}, \quad j=1,\dots,n, $$
@@ -385,15 +385,15 @@ We summarize the characterisation of Hardy spaces:
     \item The map ${}^* : f \mapsto f^*$ is an isometry from $H^p$ onto
     $$ L^p_+(\T) \coloneqq \{ f \in L^p(\T) : \forall n < 0: \hat{f}(n) = 0 \}, $$
     which is a closed subspace of $L^p(\T)$.
-    \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
-    $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \dd \zeta, \quad z \in \D $$
+    % \item Every $f \in H^p$ can be written as a Cauchy integral of its boundary values:
+    % $$ f(z) = \frac{1}{2 \pi i} \int_\T \frac{f^*(\zeta)}{\zeta - z} \dd \zeta, \quad z \in \D $$
   \end{enumerate}
 \end{theorem}
 
 We will also use the following lemma:
 
 \begin{lemma} \label{lem:factorisation}
-  Let $f \in \Hol(\D)$, then there exist $g_1, g_2 \in \Hol(\D)$ such that
+  Let $f \in \Hol(\cl{\D})$, then there exist $g_1, g_2 \in \Hol(\cl{\D})$ such that
   $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
 \end{lemma}
 
@@ -482,7 +482,7 @@ We will also use the following lemma:
   Recall that
   $$ u = \tau ( \bar{f_k} \wirtzbar h_j - \bar{f_j} \wirtzbar h_k), \quad \textrm{where} \quad \tau \coloneqq \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1}. $$
   Since $h_\ell = \tau \bar{f_\ell}$ we first calculate want to calculate $\wirtzbar \tau$. We first notice that with function $m(z) \coloneqq z^{-1}$ and any nonvanishing function $\alpha \in C^\infty$ we have by the chain rule
-  $$ \wirtz \alpha^{-1} = \wirtz (m \circ \alpha) = (\wirtz m \circ \alpha) \wirtz \alpha + (\wirtzbar m \circ \alpha) \wirtz \bar{g} = -\alpha^{-2} \partial \alpha, $$
+  $$ \wirtz \alpha^{-1} = \wirtz (m \circ \alpha) = (\wirtz m \circ \alpha) \wirtz \alpha + (\wirtzbar m \circ \alpha) \wirtz \bar{\alpha} = -\alpha^{-2} \partial \alpha, $$
   and analogously $\wirtzbar \alpha^{-1} = -\alpha^{-2} \wirtzbar \alpha$. Therefore
   \begin{align*}
     \wirtzbar \tau &= - \tau^2 \sum_{\ell=1}^n \wirtzbar (f_\ell \bar{f_\ell}) = -\tau^2 \sum_{\ell=1}^n ( f_\ell \wirtzbar \bar{f_\ell} + \bar{f_\ell} \wirtzbar f_\ell ) = \\
@@ -494,11 +494,23 @@ We will also use the following lemma:
     u &= \tau ( \bar{f_k} \wirtzbar h_j - \bar{f_j} \wirtzbar h_k) = \tau^2 ( \bar{f_k} \bar{f_j'} - \bar{f_k} \bar{f_j} \tau \eta - \bar{f_j} \bar{f_k'} + \bar{f_j} \bar{f_k} \tau \eta ) = \tau^2 ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ), \\
     \partial u &= \tau^2 \partial ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ) + ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ) \partial \tau^2 = -2 \tau^3 \left( \sum_{\ell=1}^n \bar{f_\ell} f_\ell' \right) ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ).
   \end{align*}
+  Inserting back we obtain (since $\vert f_\ell \vert \leq 1$ and $\vert \tau \vert \leq \delta^{-1}$)
+  \begin{align*}
+    \vert I_1 \vert &= \left\vert -2 \int_\D \tau^3 \left( \sum_{\ell=1}^n \bar{f_\ell} f_\ell' \bar{f_k} \bar{f_j'} - \bar{f_\ell} f_\ell' \bar{f_j} \bar{f_k'} \right) F \psi \dd \lambda^2 \right\vert \leq \\
+    &\leq \frac{2}{\delta^3} \sum_{\ell=1}^n \left( \int_\D \vert f_\ell' f_j' F \vert \psi \dd \lambda^2 + \int_\D \vert f_\ell' f_k' F \vert \psi \dd \lambda^2 \right), \\
+    \vert I_2 \vert &= \left\vert \int_\D \tau^2 ( \bar{f_k} \bar{f_j'} - \bar{f_j} \bar{f_k'} ) F' \psi \dd \lambda^2 \right\vert \leq \\
+    &\leq \frac{1}{\delta^2} \left( \int_\D \vert f_j' F' \vert \psi \dd \lambda^2 + \int_\D \vert f_k' F' \vert \psi \dd \lambda^2 \right).
+  \end{align*}
+  It therefore suffices to bound the integrals
+  \begin{equation*}
+    J_1 \coloneqq \int_\D \vert f_1' f_2' F \vert \psi \dd \lambda^2, \quad J_2 \coloneqq \int_\D \vert f' F' \vert \psi \dd \lambda^2,
+  \end{equation*}
+  where $f, f_1, f_2, F \in \Hol(\cl{\D})$ and $\Vert f \Vert_\infty, \Vert f_1 \Vert_\infty, \Vert f_2 \Vert_\infty, \Vert F \Vert_1 \leq 1$. The issue is that a-priori we do not have bounds on the derivatives.
 \end{innerproof}
 
 \section{Integral estimates}
 
-\begin{lemma}
+\begin{lemma} \label{lem:integral-estimates}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
   \begin{enumerate}
     \item $ \displaystyle \int_\D \vert f' \vert^2 \psi \dd \lambda^2 \leq \frac{1}{4} \Vert f \Vert_2^2 $
@@ -548,7 +560,7 @@ We will also use the following lemma:
       &\leq \Vert f \Vert_2 \Vert u \Vert_\infty \Vert g \Vert_2 \Vert v \Vert_\infty.
     \end{align*}
 
-    \item By \Cref{lem:factorisation} we can write $f = g_1 g_2$ with $\Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1$. Using 3. we then obtain
+    \item By \Cref{lem:factorisation} we can write $f = g_1 g_2$ with $g_1, g_2 \in \Hol(\cl{\D})$ and $\Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1$. Using 3. we then obtain
     \begin{align*}
       \int_\D \vert f u' v' \vert \psi \dd \lambda^2 &= \int_\D \vert g_1 g_2 u' v' \vert \psi \dd \lambda^2 \leq \\
       &\leq \Vert g_1 \Vert_2 \Vert g_2 \Vert_2 \Vert u \Vert_\infty \Vert v \Vert_\infty = \Vert f \Vert_1 \Vert u \Vert_\infty \Vert v \Vert_\infty.
@@ -563,13 +575,13 @@ We will also use the following lemma:
     \item We write $f = g_1 g_2$ as in 4. and use 5. to obtain
     \begin{align*}
       \int_\D \vert f' u' \vert \psi \dd \lambda^2 &\leq \int_\D \vert (g_1 g_2)' u' \vert \psi \dd \lambda^2 \leq \int_\D \vert g_1' g_2 u' \vert \psi \dd \lambda^2 + \int_\D \vert g_1 g_2' u' \vert \psi \dd \lambda^2 \leq \\
-      &\leq \frac{1}{2} \Vert g_2 \Vert_2 \Vert g_1 \Vert_2 \Vert u \Vert_\infty + \frac{1}{2} \Vert g_1 \Vert_2 \Vert g_2 \Vert_2 \Vert u \Vert_\infty = \Vert f \Vert_1 \Vert u \Vert_\infty.
+      &\leq \frac{1}{2} \Vert g_2 \Vert_2 \Vert g_1 \Vert_2 \Vert u \Vert_\infty + \frac{1}{2} \Vert g_1 \Vert_2 \Vert g_2 \Vert_2 \Vert u \Vert_\infty = \Vert f \Vert_1 \Vert u \Vert_\infty. \qedhere
     \end{align*}
   \end{enumerate}
 \end{proof}
 
-\begin{innerproof}[Proof (continued)]
-  \todo[Finish proof.]
-\end{innerproof}
+\begin{proof}[Proof (continued)]
+  \textit{Step 7 (Conclusion):} Using \Cref{lem:integral-estimates}, specifically points 4. and 6., we obtain $\vert J_1 \vert \leq 1$ and $\vert J_2 \vert \leq 1$ concluding the proof.
+\end{proof}
 
 \end{document}
