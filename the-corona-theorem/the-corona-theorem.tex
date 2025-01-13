@@ -402,9 +402,9 @@ We will also use the following lemma:
   $$ g_j = h_j - \sum_{k=1}^n a_{jk} f_k, $$
   and $a_{jk} \in C^\infty(\cl{\D})$ is a solution of the partial differential equation
   $$ \Wirtzbar[y] = \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1} \left( \Wirtzbar[h_j] \bar{f_k} - \Wirtzbar[h_k] \bar{f_j} \right). $$
-  We want to show that the solution $a_{jk}$ can be chosen in a way, that the resulting functions $g_j \in \Hol(\cl{\D})$ are bounded in the $H^\infty$-norm by a constant depending only on $n$ and $\delta$, that is
+  We want to show that the solution $a_{jk}$ can be chosen in a way, that the resulting functions $g_j$ are bounded in the $H^\infty$-norm by a constant depending only on $n$ and $\delta$, that is
   $$ \Vert g_j \Vert_\infty \leq C_{n, \delta}. $$
-  Denote by $u_{jk}$ the right-hand side of the partial differential equation above. We fix a solution $\wirtzbar v_{jk} = u_{jk}$ and notice that if $\wirtzbar a_{jk} = u_{jk}$ is another solution, then
+  Note that we only need $g_j \in H^\infty$, not necessarily $\in \Hol(\cl{\D})$. Denote by $u_{jk}$ the right-hand side of the partial differential equation above. We fix a solution $\wirtzbar v_{jk} = u_{jk}$ and notice that if $\wirtzbar a_{jk} = u_{jk}$ is another solution bounded on $\D$, then
   $$ \wirtzbar (a_{jk} - v_{jk}) = \wirtzbar a_{jk} - \wirtzbar v_{jk} = 0, $$
   that is the difference is bounded and holomorphic, thus in $H^\infty$. We can therefore write
   $$ a_{jk} = v_{jk} + p, \quad p \in H^\infty. $$
