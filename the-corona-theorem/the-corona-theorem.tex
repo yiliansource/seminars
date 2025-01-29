@@ -156,12 +156,10 @@
 
 \begin{center}
   {\LARGE\scshape\bfseries{The Corona Theorem}} \\
-  \scshape{Ian Hornik}
+  {\scshape{Ian Hornik -- Seminar notes}}
 \end{center}
 
 \vspace{1em}
-
-These are my notes for my talk in the winter semester of 2024, in the analysis seminar at the Technical University of Vienna.
 
 % Content Summary:
 % §0: a brief summary of what we want to, concluding with the statement of the equivalent theorem we want to prove.
@@ -170,11 +168,11 @@ These are my notes for my talk in the winter semester of 2024, in the analysis s
 % §3: Hardy spaces - overview and some properties, along with the dualisation lemma and application the proof.
 % §4: Integral estimates - show the required estimates and apply them to the proof.
 
-We will denote the space of all complex-valued, bounded, analytic functions on the unit disk $\D$ as $H^\infty$. Equipped with the supremum norm $\Vert \cdot \Vert_\infty$ this space becomes a commutative Banach algebra. The space of all multiplicative, bounded, linear functionals on $H^\infty$ not identically zero is denoted $\Delta(H^\infty)$ and is called the \emph{Gelfand space} of $H^\infty$. We endow this space with the subspace topology of the weak\nobreakdash-* topology on the topological dual $(H^\infty)'$, which we will refer to as the \emph{Gelfand topology}. For each $z \in \D$ we consider the point-evaluation functional
+We will denote the space of all complex-valued, bounded, analytic functions on the complex unit disk $\D$ as $H^\infty$. Equipped with the supremum norm $\Vert \cdot \Vert_\infty$ this space becomes a commutative Banach algebra. The space of all multiplicative, bounded, linear functionals on $H^\infty$ not identically zero is denoted $\Delta(H^\infty)$ and is called the \emph{Gelfand space} of $H^\infty$. We endow this space with the subspace topology of the weak\nobreakdash-* topology on the topological dual $(H^\infty)'$, which we will refer to as the \emph{Gelfand topology}. For each $z \in \D$ we consider the point-evaluation functional
 \begin{equation*}
   \pi_z : H^\infty \to \C,\; f \mapsto f(z).
 \end{equation*}
-This is clearly multiplicative, bounded and linear and therefore belongs to $\Delta(H^\infty)$. The set of all such functionals $\pi_z, z \in \D$ will be denoted as $\Delta_0$. The \emph{corona} is defined as the complement of the closure of $\Delta_0$ in the Gelfand topology. The corona theorem now states:
+This is clearly linear, multiplicative and bounded and therefore belongs to $\Delta(H^\infty)$. The set of all such functionals $\pi_z, z \in \D$ will be denoted as $\Delta_0$. The \emph{corona} is defined as the complement of the closure of $\Delta_0$ in the Gelfand topology. The corona theorem now states:
 
 \begin{theorem}[L. Carleson] \label{thm:corona}
   The corona is empty. In other words, $\Delta_0$ is dense in $\Delta(H^\infty)$.
@@ -220,8 +218,8 @@ Over the following sections we will prove a stronger version of the right-hand s
 
   \textit{Step 1 (Reduction to $f_1, \dots, f_n \in \Hol(\cl{\D})$):} Assume that the statement of the theorem holds for all $\widetilde{f_1}, \dots, \widetilde{f_n} \in \Hol(\cl{\D})$, we claim that it then also holds in its original form\footnote{Note that this does \textbf{not} mean that we can assume $f_1, \dots, f_n \in \Hol(\cl{\D})$ in the previous proposition.}. For our given $f_1, \dots, f_n$ satisfying the premise of the theorem and all $0 < s < 1$ we define $ f_{j,s}(z) \coloneqq f_{j}(sz), \, j=1,\dots,n $. Then for every $0 < s < 1$ the functions $f_{j,s}$ are in $\Hol(\cl{\D})$ and satisfy the premise of the theorem. By our assumption there exist $g_{j,s} \in H^\infty, \, j=1,\dots,n$ such that
   $$ \Vert g_{j,s} \Vert_\infty \leq C_{n,\delta}, \hspace{0.5em} j = 1, \dots, n, \quad \textrm{and} \quad \sum_{j=1}^n f_{j,s} g_{j,s} = 1. $$
-  For a fixed $j \in \{ 1, \dots, n \}$, the set $\{ g_{j,s} : 0 < s < 1 \}$ is uniformly bounded and therefore normal in $\Hol(\D)$. By Montel's Theorem there exists a sequence $s_m \to 1$ and some $g_j \in \Hol(\D)$ such that $g_{j,s_m} \to g_{j}$ compactly. In particular, we obtain
-  $$ \Vert g_j \Vert_\infty = \lim_{m \to \infty} \Vert g_{j,s_m} \Vert_\infty \leq C_{n,\delta}, \quad j=1,\dots,n, $$
+  For a fixed $j \in \{ 1, \dots, n \}$, the set $\{ g_{j,s} : 0 < s < 1 \}$ is uniformly bounded and therefore normal in $\Hol(\D)$. Choose a sequence of numbers $0 < s_m < 1$, such that $s_m \to 1$. Using Montel's Theorem and passing to a subsequence $n$ times, we obtain that for any $j \in \{ 1, \dots, n \}$ there exists a $g_j \in \Hol(\D)$ such that $g_{j,s_m} \to g_j $ compactly. In particular, we obtain
+  $$ \Vert g_j \Vert_\infty = \lim_{m \to \infty} \Vert g_{j,s_m} \Vert_\infty \leq C_{n,\delta}, \quad \textrm{for} \quad j=1,\dots,n, $$
   and
   $$ 1 = \lim_{m \to \infty} \sum_{j=1}^n f_{j,s_m} g_{j,s_m} = \sum_{j=1}^n f_j g_j, $$
   concluding our claim. We may thus assume that our given $f_1, \dots, f_n$ are holomorphic on $\cl{\D}$ instead.
@@ -323,12 +321,12 @@ Before listing properties of the Wirtinger operators we quickly want to recall t
       &= g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} \sum_{k=1}^n g_k f_k = g_j - \frac{1}{\displaystyle\sum_{\ell=1}^n \vert f_\ell \vert^2} \overline{f_j} P_{1,0} g = \\
       &= g_j,
     \end{align*}
-    and therefore $g \in \ran P_{2,1}$.
+    and therefore $P_{2,1}p = g$ and $g \in \ran P_{2,1}$.
     \item For given $v \in C^\infty(\cl{\D})$ we want to solve the partial differential equation
     $$ \frac{\partial u}{\partial \bar{z}} = v \quad \textrm{(on $\cl\D$)} $$
     for some $u \in C^\infty(\cl{\D})$. We will approach this using a fundamental solution of the differential operator $\wirtzbar$. Recall that
     $$ \Gamma(z) \coloneqq \frac{1}{2 \pi} \log \vert z \vert $$
-    is a fundamental solution of the Laplace operator, that is we have $\Delta \Gamma = \delta_0$ distributionally, where $\delta_0$ denotes the delta distribution at 0. We claim that $\frac{1}{\pi z}$ is a fundamental solution of $\wirtzbar$, and verify this via
+    is locally integrable, therefore can be seen as a distribution and is a fundamental solution of the Laplace operator, that is we have $\Delta \Gamma = \delta_0$ distributionally, where $\delta_0$ denotes the delta distribution at 0. We claim that $\frac{1}{\pi z}$ is a fundamental solution of $\wirtzbar$, and verify this, by regarding $\wirtzbar$ as a distributional derivative operator, via
     \begin{align*}
       \wirtzbar \frac{1}{z} &= \wirtzbar \frac{\bar{z}}{\vert z \vert^2} = \frac{1}{2} (\partial_x + i \partial_y) \frac{x - i y}{x^2 + y^2} = \\
       &= \frac{1}{2} \left[ \partial_x \frac{x}{x^2 + y^2} - i \partial_x \frac{y}{x^2 + y^2} + i \partial_y \frac{x}{x^2 + y^2} + \partial_y \frac{y}{x^2 + y^2} \right] = \\
@@ -390,13 +388,6 @@ We summarize the characterisation of Hardy spaces:
   \end{enumerate}
 \end{theorem}
 
-We will also use the following lemma:
-
-\begin{lemma} \label{lem:factorisation}
-  Let $f \in \Hol(\cl{\D})$, then there exist $g_1, g_2 \in \Hol(\cl{\D})$ such that
-  $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
-\end{lemma}
-
 \begin{innerproof}[Proof (continued)]
   Returning to our proof, recall that we want to obtain a bound on the functions $\Vert g_j \Vert_\infty$, where
   $$ g_j = h_j - \sum_{k=1}^n a_{jk} f_k, $$
@@ -428,7 +419,7 @@ We will also use the following lemma:
 \end{lemma}
 
 \begin{proof}
-  We have $L^\infty(\T) \cong L^1(\T)'$ via the duality
+  We have $L^\infty(\T) \cong L^1(\T)'$ isometrically via the duality
   $$ \langle f, g \rangle \coloneqq \frac{1}{2\pi} \int_\T f g \dd \mu, \quad f \in L^\infty(\T),\; g \in L^1(\T). $$
   Since $(H_0^1)^* \leq L^1(\T)$ we therefore have $((H_0^1)^*)' \cong L^\infty(\T) / ((H_0^1)^*)^\perp$ via
   $$ \langle f, g \rangle = \frac{1}{2\pi} \int_\T f g \dd \mu, \quad f \in L^\infty(\T) / ((H_0^1)^*)^\perp,\; g \in (H_0^1)^*. $$
@@ -443,7 +434,7 @@ We will also use the following lemma:
 \end{proof}
   
 \begin{innerproof}[Proof (continued)]
-  \textit{Step 5 (Dualisation):} Since we longer need the indices, we now simply write $v$ instead of $v_{jk}$. Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^* \in L^\infty(\T) / (H^\infty)^*$ as
+  \textit{Step 5 (Dualisation):} We now abbreviate $v_{jk}$ as $v$. Applying the above lemma to our previous situation we can re-describe the norm of $v + (H^\infty)^* \in L^\infty(\T) / (H^\infty)^*$ as
   \begin{align*}
     \Vert \Phi(v + (H^\infty)^*) \Vert &= \sup_{\substack{F \in (H_0^1)^* \\ \Vert F \Vert_1 \leq 1}} \vert \Phi(v + (H^\infty)^*)(F) \vert = \sup_{\substack{F \in H_0^1 \\ \Vert F \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v F^* \dd \mu \right\vert = \\
     &= \sup_{\substack{F \in H_0^1 \\ \Vert F \Vert_1 \leq 1}} \left\vert \lim_{r \to 1} \frac{1}{2 \pi} \int_\T v F_r \dd \mu \right\vert = \sup_{\substack{F \in \Hol(\cl{\D}) \\ F(0) = 0, \Vert F \Vert_1 \leq 1}} \left\vert \frac{1}{2 \pi} \int_\T v F \dd \mu \right\vert.
@@ -458,13 +449,13 @@ We will also use the following lemma:
   \begin{align*}
     \int_{\D_\varepsilon} \sigma \Delta \varphi - \varphi \Delta \sigma \dd \lambda^2 = \int_\T \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \dd \mu - \int_{\partial B_\varepsilon(0)} \sigma \frac{\partial \varphi}{\partial r} - \varphi \frac{\partial \sigma}{\partial r} \dd \mathcal{H}^1,
   \end{align*}
-  where $\frac{\partial}{\partial r}$ denotes the radial derivative. Simplifying results in
+  where $\frac{\partial}{\partial r}$ denotes the radial derivative and $\mathcal{H}^1$ denotes the Hausdorff measure (or any kind of surface measure for that matter). Simplifying results in
   \begin{align*}
     -\int_{\D_\varepsilon} \varphi \Delta \sigma \dd \lambda^2 = \frac{1}{2 \pi} \int_\T \sigma \dd \mu - \frac{1}{2 \pi} \int_{\partial B_\varepsilon(0)} \frac{\sigma}{\varepsilon} - \frac{\partial \sigma}{\partial r} \log \varepsilon \dd \mathcal{H}^1.
   \end{align*}
   By the intermediate value theorem for integrals for any $\varepsilon > 0$ there exists a $\zeta_\varepsilon \in \partial B_\varepsilon(0)$ such that
   \begin{align*}
-    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \sigma \dd \mathcal{H}^1 = \sigma(\zeta_\varepsilon) \to \sigma(0) = v(0) F(0) = 0.
+    \frac{1}{2\pi\varepsilon} \int_{\partial B_\varepsilon(0)} \vert \sigma \vert \dd \mathcal{H}^1 = \vert \sigma(\zeta_\varepsilon) \vert \to \vert \sigma(0) \vert = \vert v(0) F(0) \vert = 0.
   \end{align*}
   Furthermore $\left\vert \frac{\partial \sigma}{\partial r} \right\vert \leq M$ on $\cl{\D}$ for some $M > 0$, thus
   \begin{align*}
@@ -479,7 +470,7 @@ We will also use the following lemma:
   \end{align*}
   Our goal is to show the existence of a constant $K_{n,\delta}$ such that
   $$ \left\vert \frac{1}{2 \pi} \int_\T v F \dd \mu \right\vert \leq 4 (\vert I_1 \vert + \vert I_2 \vert) \leq K_{n,\delta}. $$
-  Recall that
+  To do this we want to describe $I_1, I_2$ more explicitely. Recall that
   $$ u = \tau ( \bar{f_k} \wirtzbar h_j - \bar{f_j} \wirtzbar h_k), \quad \textrm{where} \quad \tau \coloneqq \left( \sum_{\ell=1}^n \vert f_\ell \vert^2 \right)^{-1}. $$
   Since $h_\ell = \tau \bar{f_\ell}$ we first calculate want to calculate $\wirtzbar \tau$. We first notice that with function $m(z) \coloneqq z^{-1}$ and any nonvanishing function $\alpha \in C^\infty$ we have by the chain rule
   $$ \wirtz \alpha^{-1} = \wirtz (m \circ \alpha) = (\wirtz m \circ \alpha) \wirtz \alpha + (\wirtzbar m \circ \alpha) \wirtz \bar{\alpha} = -\alpha^{-2} \partial \alpha, $$
@@ -509,6 +500,15 @@ We will also use the following lemma:
 \end{innerproof}
 
 \section{Integral estimates}
+
+We will require the following lemma regarding the $H^1$- and $H^2$-norms:
+
+\begin{lemma} \label{lem:factorisation}
+  Let $f \in \Hol(\cl{\D})$, then there exist $g_1, g_2 \in \Hol(\cl{\D})$ such that
+  $$ f = g_1 g_2, \quad \textrm{and} \quad \Vert g_1 \Vert_2^2 = \Vert g_2 \Vert_2^2 = \Vert f \Vert_1. $$
+\end{lemma}
+
+The desired bounds are now contained in the following lemma:
 
 \begin{lemma} \label{lem:integral-estimates}
   Let $f, g, u, v \in \Hol(\cl{\D})$, then the following integral estimates hold:
