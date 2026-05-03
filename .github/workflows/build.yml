@@ -33,13 +33,13 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Build Hamburger Moment Problem
+      - name: Build .pdf
         uses: xu-cheng/latex-action@v3
         with:
           root_file: hamburger-moment-problem.tex
           working_directory: hamburger-moment-problem
 
-      - name: Upload Hamburger PDF
+      - name: Upload .pdf artifact
         uses: actions/upload-artifact@v6
         with:
           name: hamburger-moment-problem
@@ -53,14 +53,45 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Build The Corona Theorem
+      - name: Build .pdf
         uses: xu-cheng/latex-action@v3
         with:
           root_file: the-corona-theorem.tex
           working_directory: the-corona-theorem
 
-      - name: Upload Corona PDF
+      - name: Upload .pdf artifact
         uses: actions/upload-artifact@v6
         with:
           name: the-corona-theorem
           path: the-corona-theorem/the-corona-theorem.pdf
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install -g wrangler
+
+      - name: Upload .pdf to library bucket
+        run: |
+          wrangler r2 object put library-files/the-corona-theorem.pdf  \
+            --remote --file the-corona-theorem/the-corona-theorem.pdf
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_ACCOUNT_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Insert metadata into library database
+        run: |
+          FILE_ID="$(uuidgen)"
+          FILE_NAME="the-corona-theorem.pdf"
+
+          cat > upsert-file.sql <<EOF
+          INSERT INTO files (file_id, file_name)
+          VALUES ('$FILE_ID', '$FILE_NAME')
+          ON CONFLICT(file_name) DO UPDATE SET
+            updated_at = CURRENT_TIMESTAMP;
+          EOF
+
+          npx wrangler d1 execute files-db --remote --file ./upsert-file.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_ACCOUNT_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
