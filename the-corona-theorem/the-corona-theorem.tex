@@ -146,6 +146,13 @@
 
 \usepackage{bold-extra}
 
+\usepackage[
+  backend=biber,
+  style=alphabetic
+]{biblatex}
+
+\addbibresource{references.bib}
+
 \begin{document}
 
 % \title{\textbf{The Smith factorization}}
@@ -197,6 +204,8 @@ There is an equivalent version of the theorem, as given by the following proposi
   $$ 1 = \phi_0(1) = \phi_0 \left( \sum_{j=1}^n \widetilde{f_j} g_j \right) = \sum_{j=1}^n \phi_0(\widetilde{f_j}) \phi_0(g_j) = 0, $$
   a contradiction.
 \end{proof}
+
+In the following notes we want to prove an equivalent version of the corona theorem, as demonstrated in \cite{fischer_lieb__funktionentheorie}. We will frequently use standard results from functional analysis, see for example \cite{fana}.
 
 \section{First Steps}
 
@@ -583,5 +592,10 @@ The desired bounds are now contained in the following lemma:
 \begin{proof}[Proof (continued)]
   \textit{Step 7 (Conclusion):} Using \Cref{lem:integral-estimates}, specifically points 4. and 6., we obtain $\vert J_1 \vert \leq 1$ and $\vert J_2 \vert \leq 1$ concluding the proof.
 \end{proof}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+\printbibliography
 
 \end{document}
