@@ -13,11 +13,11 @@ jobs:
       hamburger: ${{ steps.filter.outputs.hamburger }}
       corona: ${{ steps.filter.outputs.corona }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Check changed folders
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: |
             hamburger:
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build Hamburger Moment Problem
         uses: xu-cheng/latex-action@v3
@@ -40,7 +40,7 @@ jobs:
           working_directory: hamburger-moment-problem
 
       - name: Upload Hamburger PDF
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: hamburger-moment-problem
           path: hamburger-moment-problem/hamburger-moment-problem.pdf
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build The Corona Theorem
         uses: xu-cheng/latex-action@v3
@@ -60,7 +60,7 @@ jobs:
           working_directory: the-corona-theorem
 
       - name: Upload Corona PDF
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: the-corona-theorem
           path: the-corona-theorem/the-corona-theorem.pdf
