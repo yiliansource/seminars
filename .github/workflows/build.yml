@@ -1,0 +1,67 @@
+name: Build LaTeX PDFs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      hamburger: ${{ steps.filter.outputs.hamburger }}
+      corona: ${{ steps.filter.outputs.corona }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check changed folders
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            hamburger:
+              - 'hamburger-moment-problem/**'
+            corona:
+              - 'the-corona-theorem/**'
+
+  build-hamburger:
+    needs: changes
+    if: needs.changes.outputs.hamburger == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Hamburger Moment Problem
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: hamburger-moment-problem.tex
+          working_directory: hamburger-moment-problem
+
+      - name: Upload Hamburger PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: hamburger-moment-problem
+          path: hamburger-moment-problem/hamburger-moment-problem.pdf
+
+  build-corona:
+    needs: changes
+    if: needs.changes.outputs.corona == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build The Corona Theorem
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: the-corona-theorem.tex
+          working_directory: the-corona-theorem
+
+      - name: Upload Corona PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-corona-theorem
+          path: the-corona-theorem/the-corona-theorem.pdf
