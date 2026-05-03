@@ -65,9 +65,9 @@ jobs:
           name: the-corona-theorem
           path: the-corona-theorem/the-corona-theorem.pdf
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
 
       - run: npm install -g wrangler
 
@@ -83,11 +83,15 @@ jobs:
         run: |
           FILE_ID="$(uuidgen)"
           FILE_NAME="the-corona-theorem.pdf"
+          DISPLAY_NAME="The corona theorem"
+          DESCRIPTION="My notes for my presentation of the corona theorem in the functional analysis seminar at the TU Vienna."
 
           cat > upsert-file.sql <<EOF
-          INSERT INTO files (file_id, file_name)
-          VALUES ('$FILE_ID', '$FILE_NAME')
+          INSERT INTO files (file_id, file_name, display_name, description)
+          VALUES ('$FILE_ID', '$FILE_NAME', '$DISPLAY_NAME', '$DESCRIPTION')
           ON CONFLICT(file_name) DO UPDATE SET
+            display_name = excluded.display_name,
+            description = excluded.description,
             updated_at = CURRENT_TIMESTAMP;
           EOF
 
