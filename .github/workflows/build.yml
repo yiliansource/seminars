@@ -91,7 +91,7 @@ jobs:
             updated_at = CURRENT_TIMESTAMP;
           EOF
 
-          npx wrangler d1 execute files-db --remote --file ./upsert-file.sql
+          npx wrangler d1 execute library-data --remote --file ./upsert-file.sql
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_ACCOUNT_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
